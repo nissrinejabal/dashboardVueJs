@@ -1,0 +1,93 @@
+{
+  "users": [
+    {
+      "name": "admin",
+      "password": "123456789",
+      "email": "admin@gmail.com",
+      "id": "1"
+    }
+  ],
+  "restaurants": [
+    {
+      "id": "1",
+      "restname": "REST DU PARC",
+      "phone": "667-76757",
+      "address": "Media",
+      "userId": 1
+    },
+    {
+      "id": "2",
+      "restname": "REST DU PARC",
+      "phone": "667-76757",
+      "address": "Media",
+      "userId": 1
+    },
+    {
+      "id": "3",
+      "restname": "THIS IS A NEW RESTA",
+      "phone": "NEW ONE",
+      "address": "NEW ONE",
+      "userId": 2
+    }
+  ],
+  "categories": [
+    {
+      "categorieName": "nissrinef cat",
+      "userId": 1,
+      "RestId": 1,
+      "id": "1"
+    },
+    {
+      "categorieName": "nissrinef",
+      "userId": 1,
+      "RestId": 1,
+      "id": "2"
+    },
+    {
+      "categorieName": "2",
+      "userId": 1,
+      "RestId": 2,
+      "id": "3"
+    }
+  ],
+  "items": [
+    {
+      "itemname": "1234",
+      "price": "10.99",
+      "description": "Delicious burger with cheese and veggies",
+      "Quantity": "5",
+      "RestId": 1,
+      "userId": 1,
+      "CatId": 1,
+      "id": "1"
+    },    {
+      "itemname": "345",
+      "price": "10.99",
+      "description": "Delicious burger with cheese and veggies",
+      "Quantity": "5",
+      "RestId": 1,
+      "userId": 1,
+      "CatId": 1,
+      "id": "3"
+    }, {
+      "itemname": "Burger",
+      "price": "10.99",
+      "description": "Delicious burger with cheese and veggies",
+      "Quantity": "5",
+      "RestId": 1,
+      "userId": 1,
+      "CatId": 2,
+      "id": "1"
+    }, {
+      "itemname": "Burger",
+      "price": "10.99",
+      "description": "Delicious burger with cheese and veggies",
+      "Quantity": "5",
+      "RestId": 1,
+      "userId": 1,
+      "CatId": 2,
+      "id": "6"
+    }
+    
+  ]
+}
