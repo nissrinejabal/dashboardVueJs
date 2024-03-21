@@ -38,7 +38,7 @@
       <h2>restaurant adress :{{ address }}</h2>
     </div>
 
-    <div class="restaurant-list">
+    <div class="Info-list">
       <h1>category List :</h1>
       {{ ListOfUserCategories.length }} is list of categories
       <ul class="category-list">
@@ -249,6 +249,7 @@ export default {
       // Check if all items were deleted successfully
       if (!allItemsResult.includes(false)) {
         this.successMessage = "All items deleted successfully.";
+        window.location.reload();
         // Update ListOfUserItems by fetching the updated list from the server
         await this.getItemInfo(this.userId, this.RestId);
       } else {
@@ -269,7 +270,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .page-menu {
   display: flex;
   justify-content: space-between;

@@ -1,29 +1,23 @@
 <template>
-  <div>
-    <NavbarComp />
-    <div class="restaurant-item">
-      <div class="restaurant-info">
-        <h1>
-          Delete Category {{ CatId }} <br />
-          name category: {{ categorieName }}<br />
-          i should delete category and its items
-        </h1>
-        <div class="inputs">
-          <div class="error-feedback" v-if="successMessage.length > 0">
-            {{ successMessage }}
-          </div>
-          <div class="error-feedback" v-if="errorMessage.length > 0">
-            {{ errorMessage }}
-          </div>
+  <NavbarComp />
+  <div class="delete-form">
+    <div class="delete-form">
+      <h1>Delete Category #{{ CatId }}</h1>
+      <div class="inputs">
+        <input type="text" v-model.trim="categorieName" disabled />
+        <div class="error-feedback" v-if="successMessage.length > 0">
+          {{ successMessage }}
+        </div>
+        <div class="error-feedback" v-if="errorMessage.length > 0">
+          {{ errorMessage }}
         </div>
       </div>
-      <div class="btn-class">
-        <p>Are you sure you want to delete?</p>
-        <button @click="deleteCategory">
-          Delete / delete categories and related items at once
-        </button>
-        <button @click="goBack">Go Back</button>
-      </div>
+    </div>
+    <div class="delete-verif">
+      <p>Are you sure you want to delete?(this rest its cat its items)</p>
+      <button @click="deleteCategory" class="delete">Delete</button>
+
+      <button @click="goback">Go Back</button>
     </div>
   </div>
 </template>
@@ -118,37 +112,6 @@ export default {
         this.successMessage = "";
       }
     },
-    // async deleteCategory() {
-    //   let result = await axios.delete(
-    //     `http://localhost:3000/categories/${this.CatId}`
-    //   );
-    //   let allResult = [];
-    //   for (var i = 0; i < this.AllItemsIdIs.length; i++) {
-    //     let result = await axios.delete(
-    //       `http://localhost:3000/items/${this.AllItemsIdIs[i]}`
-    //     );
-    //     if (result.status == 200) {
-    //       allResult.push(true);
-    //     } else {
-    //       allResult.push(false);
-    //     }
-    //     console.table(allResult);
-    //   }
-
-    //   if (result.status == 200 && !allResult.includes(false)) {
-    //     this.errorMessage = "";
-    //     this.successMessage = "Category deleted successfully.";
-    //     setTimeout(() => {
-    //       this.$router.push({
-    //         name: "ShowListCatgoriesComp",
-    //         params: { RestId: this.RestId },
-    //       });
-    //     }, 2000);
-    //   } else {
-    //     this.errorMessage = "Failed to delete category.";
-    //     this.successMessage = "";
-    //   }
-    // },
 
     async getCategoryInfo(userId, restaurantId, CatId) {
       let result = await axios.get(
@@ -161,12 +124,15 @@ export default {
         }
       }
     },
+    goback() {
+      this.redirectTo({ val: "ShowListCatgoriesComp" });
+    },
   },
 };
 </script>
 
 <style scoped>
-.restaurant-item {
+.info-list {
   display: flex;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -182,39 +148,5 @@ export default {
 
 .success-feedback {
   color: green;
-}
-
-.inputs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.btn-class {
-  margin-top: 20px;
-  text-align: center;
-  display: flex;
-  margin-top: 20px;
-  text-align: center;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.btn-class h1 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.btn-class p {
-  color: #666;
-  margin-bottom: 20px;
-}
-
-button:hover {
-  background-color: #cc0000;
 }
 </style>

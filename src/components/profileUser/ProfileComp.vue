@@ -1,75 +1,73 @@
 <template>
-  <div>
-    <!-- Profile display -->
-    <div class="profile">
-      <h1>Profile</h1>
-      <div class="profile-info">
-        <div class="avatar">
-          <img :src="avatar" alt="User Avatar" />
-        </div>
-        <div class="user-details">
-          <p><strong>Name:</strong> {{ name }}</p>
-          <p><strong>Email:</strong> {{ email }}</p>
-          <p><strong>Password:</strong> {{ password }}</p>
-        </div>
+  <!-- Profile display -->
+  <div class="profile">
+    <h1>Profile</h1>
+    <div class="profile-info">
+      <div class="avatar">
+        <img :src="avatar" alt="User Avatar" />
       </div>
-      <br />
-      <!-- Button to toggle the update form -->
-      <button @click="toggleUpdateForm">Update Your Profile</button>
-      <button @click="goback">go back home</button>
-      <!-- Update form -->
-      <div v-if="showUpdateForm" class="sign-up">
-        <div class="card">
-          <div class="card2">
-            <h1>Update Information</h1>
-            <form @submit.prevent="update">
-              <p class="parae">Nom</p>
-              <p>
-                <input
-                  type="text"
-                  class="response-box"
-                  placeholder="Name"
-                  v-model.trim="name"
-                />
-                <br />
-                <br />
-                <span class="error-feedback" v-if="v$.name.$error">
-                  {{ v$.name.$errors[0].$message }}
-                </span>
-              </p>
-              <p class="parae">Email</p>
-              <p>
-                <input
-                  type="email"
-                  class="response-box"
-                  placeholder="Email"
-                  v-model.trim="email"
-                />
-                <br />
-                <br />
-                <span class="error-feedback" v-if="v$.email.$error">
-                  {{ v$.email.$errors[0].$message }}
-                </span>
-              </p>
-              <p class="parap">Password</p>
-              <p>
-                <input
-                  type="password"
-                  class="response-box"
-                  placeholder="Password"
-                  v-model.trim="password"
-                />
-                <br />
-                <br />
-                <span class="error-feedback" v-if="v$.password.$error">
-                  {{ v$.password.$errors[0].$message }}
-                </span>
-                <br />
-                <span class="error-feedback">{{ UpdateErr }}</span>
-              </p>
+      <div class="user-details">
+        <p><strong>Name:</strong> {{ name }}</p>
+        <p><strong>Email:</strong> {{ email }}</p>
+        <p><strong>Password:</strong> {{ password }}</p>
+      </div>
+    </div>
+
+    <!-- Update form -->
+    <div class="authentication-form">
+      <div class="card">
+        <div class="card2">
+          <h1>Update Information</h1>
+          <form @submit.prevent="update">
+            <p class="parae">Nom</p>
+            <p>
+              <input
+                type="nom"
+                class="response-box"
+                placeholder="Name"
+                v-model.trim="name"
+              />
+              <br />
+              <br />
+              <span class="error-feedback" v-if="v$.name.$error">
+                {{ v$.name.$errors[0].$message }}
+              </span>
+            </p>
+            <p class="parae">Email</p>
+            <p>
+              <input
+                type="email"
+                class="response-box"
+                placeholder="Email"
+                v-model.trim="email"
+              />
+              <br />
+              <br />
+              <span class="error-feedback" v-if="v$.email.$error">
+                {{ v$.email.$errors[0].$message }}
+              </span>
+            </p>
+            <p class="parap">Password</p>
+            <p>
+              <input
+                type="password"
+                class="response-box"
+                placeholder="Password"
+                v-model.trim="password"
+              />
+              <br />
+              <br />
+              <span class="error-feedback" v-if="v$.password.$error">
+                {{ v$.password.$errors[0].$message }}
+              </span>
+              <br />
+              <span class="error-feedback">{{ UpdateErr }}</span>
+            </p>
+            <div class="btn-profile">
               <button type="submit" @click="update()">Update</button>
-            </form>
-          </div>
+              <button @click="goback">go back home</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -114,7 +112,7 @@ export default {
       this.name = userData.name;
       this.email = userData.email;
       this.password = userData.password;
-      this.avatar = require("@/assets/images/1.jpg");
+      this.avatar = require("../../../src/assets/images/1.jpg");
       this.userId = userData.id;
     }
   },
@@ -134,7 +132,7 @@ export default {
           );
           if (result.status === 200) {
             localStorage.setItem("user-info", JSON.stringify(result.data));
-            // this.redirectTo({ val: "home" });
+
             window.location.reload();
             // this.$router.push({
             //   name: "home",
@@ -150,48 +148,23 @@ export default {
         }
       }
     },
-    toggleUpdateForm() {
-      this.showUpdateForm = !this.showUpdateForm;
-    },
+    // toggleUpdateForm() {
+    //   this.showUpdateForm = !this.showUpdateForm;
+    // },
     goback() {
       this.redirectTo({ val: "home" });
     },
   },
 };
 </script>
-
-<style>
-/* Profile styles */
-.profile {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+<style scoped>
+.authentication-form {
+  height: 55vh;
 }
 
-.profile h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.profile-info {
+.btn-profile {
+  margin: 0 10px;
   display: flex;
-  align-items: center;
-}
-
-.avatar {
-  margin-right: 20px;
-}
-
-.avatar img {
-  width: 100px;
-  border-radius: 50%;
-}
-
-.user-details p {
-  margin-bottom: 10px;
-}
-
-.user-details p strong {
-  margin-right: 5px;
+  justify-content: space-between;
 }
 </style>

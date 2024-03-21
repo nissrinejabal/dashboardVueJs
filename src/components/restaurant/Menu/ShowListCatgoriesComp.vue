@@ -12,7 +12,7 @@
       <button @click="viewCategory">go back menu(rja3 bmo)</button>
     </router-link>
   </div>
-  <div class="restaurant-list">
+  <div class="Info-list">
     <h1>Categories List :</h1>
     <div class="mycla">
       <p class="listheader" v-if="numOfCategories > 0">
@@ -30,8 +30,8 @@
     </div>
 
     <ul>
-      <li v-for="Cat in ListOfCategories" :key="Cat.id" class="restaurant-item">
-        <div class="restaurant-info">
+      <li v-for="Cat in ListOfCategories" :key="Cat.id" class="info-list">
+        <div class="global-info">
           <h2>{{ Cat.categorieName }}</h2>
         </div>
         <div class="button-container">
@@ -151,7 +151,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .routere {
   display: flex;
   justify-content: space-between;

@@ -10,9 +10,6 @@
       <router-link :to="{ name: 'addres' }">
         <button type="button">add new restaurant</button>
       </router-link>
-      <!-- <router-link :to="{ name: 'addnewrestaurantView' }">
-        <button type="button">add rest</button>
-      </router-link> -->
     </div>
     <ShowlistComp :allRestaurant="listOfRestaurant" />
     <!-- hadi ktasama props :allRestaurant="listOfRestaurant" aray  pros fiha all aray list -->
@@ -63,10 +60,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.rule {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px;
-}
-</style>
+<style></style>

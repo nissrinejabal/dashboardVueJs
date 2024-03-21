@@ -1,5 +1,5 @@
 <template>
-  <div class="restaurant-list">
+  <div class="Info-list">
     <!-- hada comp child wlidat  -->
     <h1>Restaurant List</h1>
     <!-- <p>{{ allRestaurant }}</p> -->
@@ -15,7 +15,10 @@
         <!-- Delete confirmation popup -->
         <div v-if="showPopup" class="popup-container">
           <div class="popup">
-            <p>Are you sure you want to delete all items(rest,cat,items)</p>
+            <p>
+              Are you sure you want to delete all restaurants ? (rest,cat,items)
+            </p>
+            <br />
             <button @click="deleteAllItems">OK</button>
             <button @click="cancelDeletion">No</button>
           </div>
@@ -24,8 +27,8 @@
     </div>
 
     <ul>
-      <li v-for="rest in allRestaurant" :key="rest.id" class="restaurant-item">
-        <div class="restaurant-info">
+      <li v-for="rest in allRestaurant" :key="rest.id" class="info-list">
+        <div class="global-info">
           <h2>{{ rest.restname }}</h2>
           <p>
             <strong>phone:</strong><br />
@@ -68,9 +71,10 @@
       </li>
     </ul>
   </div>
+  <div class="body">hh</div>
 </template>
-<!-- <li v-for="(rest, i) in allRestaurant" :key="i" class="restaurant-item">
-        <div class="restaurant-info">
+<!-- <li v-for="(rest, i) in allRestaurant" :key="i" class="info-list">
+        <div class="global-info">
           <h2>{{ rest.restname }}</h2>
           <p><strong>phone:</strong> {{ rest.phone }}</p>
           <p><strong>address:</strong> {{ rest.address }}</p>
@@ -207,131 +211,9 @@ export default {
   },
 };
 </script>
-
-<style>
-.restaurant-list {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
+<style scoped>
 h1 {
   text-align: center;
   margin-bottom: 20px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-.restaurant-item {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.restaurant-info {
-  flex: 1;
-}
-
-.button-container {
-  display: flex;
-  align-items: center;
-}
-
-.showbtn {
-  margin-left: 10px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.Menu-btn {
-  background-color: #ffc107;
-  color: #000;
-  border: 1px solid #ffc107;
-}
-
-.delete-btn {
-  background-color: #dc3545;
-  color: #fff;
-  border: none;
-}
-.norestadded {
-  background: red;
-  padding: 1rem 1rem;
-}
-.mycla {
-  display: flex;
-  justify-content: space-between;
-}
-/*///////////////////////////////*/
-/* Styles for the delete confirmation popup container */
-.popup-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Styles for the delete confirmation popup */
-.popup {
-  /* background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); */
-  background: #b90000;
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-}
-
-/* Styles for the buttons in the delete confirmation popup */
-.popup button {
-  /* margin: 0 10px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer; */
-}
-.body {
-  background-color: tan;
-  color: rgb(14, 0, 93);
-}
-
-/* On screens that are 992px wide or less, the background color is blue */
-@media screen and (max-width: 992px) {
-  .body {
-    background-color: blue;
-    color: white;
-  }
-}
-
-/* On screens that are 600px wide or less, the background color is olive */
-@media screen and (max-width: 600px) {
-  .body {
-    background-color: olive;
-    color: white;
-  }
-  .restaurant-item {
-    flex-direction: column;
-  }
-  /* Original styles */
-  .restaurant-list {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  .button-container {
-    justify-content: center;
-  }
 }
 </style>

@@ -1,8 +1,9 @@
 <template>
-  <div>
-    <!-- Profile display -->
-    <div class="profile">
-      <!-- Button to toggle the addrest form -->
+  <!-- Profile display -->
+  <div class="profile">
+    <!-- Update form -->
+    <h1>dashboard</h1>
+    <div class="authentication-form">
       <div class="card">
         <div class="card2">
           <h1>add new restaurant</h1>
@@ -10,7 +11,7 @@
             <p class="parae">Restaurant name</p>
             <p>
               <input
-                type="text"
+                type="nom"
                 class="response-box"
                 placeholder="Restaurant name"
                 v-model.trim.trim="state.restname"
@@ -24,7 +25,7 @@
             <p class="parae">Phone number</p>
             <p>
               <input
-                type="numero"
+                type="number"
                 class="response-box"
                 placeholder="phone number"
                 v-model.trim.trim="state.phone"
@@ -38,7 +39,7 @@
             <p class="parap">address</p>
             <p>
               <input
-                type="address"
+                type="adress"
                 class="response-box"
                 placeholder="address"
                 v-model.trim.trim="state.address"
@@ -49,18 +50,22 @@
                 {{ v$.address.$errors[0].$message }}
               </span>
               <br />
+              <span class="error-feedback">{{ UpdateErr }}</span>
+            </p>
+            <div class="btn-profile">
+              <button type="submit" @click="addrest()">add</button>
+              <button @click="goback">go back home</button>
+              <br />
+              <br />
+              <br />
               <span class="error-feedback"
                 >{{ errorMessage }} {{ successMessage }}</span
               >
-            </p>
-
-            <button type="submit" @click="addrest()">add</button> |
-            <button @click="goback">go back home</button>
+            </div>
           </form>
         </div>
       </div>
-      <!-- addrest form -->
-      <div v-if="showaddrestForm" class="sign-up"></div>
+      <!-- <div v-if="showaddrestForm" class="sign-up"></div> -->
     </div>
   </div>
 </template>
@@ -79,6 +84,8 @@ export default {
       restname: "",
       phone: "",
       address: "",
+      errorMessage: "",
+      successMessage: "",
     });
     // function katraja3 object
     const rules = computed(() => {
@@ -106,7 +113,7 @@ export default {
   mounted() {
     let user = localStorage.getItem("user-info");
     if (!user) {
-      this.redirectTo({ val: "SignupView" });
+      this.redirectTo({ val: "Signup" });
       console.log("User not found");
     } else {
       const userData = JSON.parse(user);
@@ -128,9 +135,8 @@ export default {
         });
         console.log("form validation daz");
         if (result.status == 201) {
-          (this.errorMessage = ""),
-            (this.successMessage = "rest daz w tajouta"),
-            console.log("daz add new restaurant");
+          this.errorMessage = "";
+          this.successMessage = "restaurant added successfully.";
 
           setTimeout(() => {
             this.redirectTo({ val: "home" });
@@ -144,8 +150,7 @@ export default {
             this.v$.address.$errors[0] = "";
           }, 2000);
         } else {
-          console.log("madaztsh add new restant ");
-          this.errorMessage = "rest not added";
+          this.errorMessage = "Failed to add restaurant.";
           this.successMessage = "";
         }
       } else {
@@ -162,38 +167,8 @@ export default {
 };
 </script>
 
-<style>
-/* Profile styles */
-.profile {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.profile h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.profile-info {
-  display: flex;
-  align-items: center;
-}
-
-.avatar {
-  margin-right: 20px;
-}
-
-.avatar img {
-  width: 100px;
-  border-radius: 50%;
-}
-
-.user-details p {
-  margin-bottom: 10px;
-}
-
-.user-details p strong {
-  margin-right: 5px;
+<style scoped>
+.authentication-form {
+  height: 60vh;
 }
 </style>

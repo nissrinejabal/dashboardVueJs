@@ -28,6 +28,13 @@
       "phone": "NEW ONE",
       "address": "NEW ONE",
       "userId": 2
+    },
+    {
+      "id": "ac56",
+      "restname": "new restar",
+      "phone": 4354435,
+      "address": "adress",
+      "userId": null
     }
   ],
   "categories": [
@@ -60,7 +67,8 @@
       "userId": 1,
       "CatId": 1,
       "id": "1"
-    },    {
+    },
+    {
       "itemname": "345",
       "price": "10.99",
       "description": "Delicious burger with cheese and veggies",
@@ -69,7 +77,8 @@
       "userId": 1,
       "CatId": 1,
       "id": "3"
-    }, {
+    },
+    {
       "itemname": "Burger",
       "price": "10.99",
       "description": "Delicious burger with cheese and veggies",
@@ -78,7 +87,8 @@
       "userId": 1,
       "CatId": 2,
       "id": "1"
-    }, {
+    },
+    {
       "itemname": "Burger",
       "price": "10.99",
       "description": "Delicious burger with cheese and veggies",
@@ -88,6 +98,5 @@
       "CatId": 2,
       "id": "6"
     }
-    
   ]
 }

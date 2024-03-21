@@ -1,6 +1,6 @@
 <template>
-  <div class="restaurant-item">
-    <div class="restaurant-info">
+  <div class="info-list">
+    <div class="global-info">
       <h1>Update Restaurant #{{ UpdateRestaurant }}</h1>
       <form @submit.prevent="add">
         <div class="inputs">
@@ -146,7 +146,7 @@ export default {
 </script>
 
 <style scoped>
-.restaurant-item {
+.info-list {
   display: flex;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -159,7 +159,7 @@ export default {
   align-items: center;
 }
 
-.restaurant-info input[type="text"] {
+.global-info input[type="text"] {
   /* width: calc(100% - 22px); */
   display: flex;
   flex-direction: column;

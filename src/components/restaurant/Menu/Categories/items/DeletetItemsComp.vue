@@ -1,8 +1,8 @@
 <template>
   <div>
     <NavbarComp />
-    <div class="restaurant-item">
-      <div class="restaurant-info">
+    <div class="info-list">
+      <div class="global-info">
         <h1>
           Delete Items id: {{ itemsId }} <br />
           name Items: {{ itemname }}<br />
@@ -155,57 +155,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.restaurant-item {
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-}
-
-.error-feedback {
-  color: red;
-}
-
-.success-feedback {
-  color: green;
-}
-
-.inputs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.btn-class {
-  margin-top: 20px;
-  text-align: center;
-  display: flex;
-  margin-top: 20px;
-  text-align: center;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.btn-class h1 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.btn-class p {
-  color: #666;
-  margin-bottom: 20px;
-}
-
-button:hover {
-  background-color: #cc0000;
-}
-</style>

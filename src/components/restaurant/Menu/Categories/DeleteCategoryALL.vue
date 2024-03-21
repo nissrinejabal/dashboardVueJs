@@ -1,36 +1,38 @@
 <template>
   <div>
     <NavbarComp />
-    <div class="restaurant-item">
-      <div class="restaurant-info">
-        <!-- <h1>
-          Delete Category
-          {{ CatId }} <br />
-          name category: {{ categorieName }}<br />
-        </h1> -->
-        <p class="red">delete category and its items</p>
-
-        <div class="restinfo">
-          <h1>
-            restname:{{ restname }} <br />
-            address:{{ address }}
-          </h1>
-        </div>
-        <div class="inputs">
-          <div class="error-feedback" v-if="successMessage.length > 0">
-            {{ successMessage }}
+    <div>
+      <div class="delete-form">
+        <div class="delete-form">
+          <h1 class="red">delete category and its items</h1>
+          <div class="inputs">
+            <input
+              type="text"
+              v-model.trim="restname"
+              placeholder="Restaurant Name"
+              disabled
+            />
+            <input
+              type="text"
+              v-model.trim="address"
+              placeholder="Address"
+              disabled
+            />
+            <div class="error-feedback" v-if="successMessage.length > 0">
+              {{ successMessage }}
+            </div>
+            <div class="error-feedback" v-if="errorMessage.length > 0">
+              {{ errorMessage }}
+            </div>
           </div>
-          <div class="error-feedback" v-if="errorMessage.length > 0">
-            {{ errorMessage }}
+          <div class="delete-verif">
+            <p>Are you sure you want to delete?</p>
+            <button @click="deleteallcategory">
+              Delete all categories, related items at once
+            </button>
+            <button @click="goBack">Go Back</button>
           </div>
         </div>
-      </div>
-      <div class="btn-class">
-        <p>Are you sure you want to delete?</p>
-        <button @click="deleteallcategory">
-          Delete/ delete all categories and all related items at once
-        </button>
-        <button @click="goBack">Go Back</button>
       </div>
     </div>
   </div>
@@ -167,65 +169,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.restaurant-item {
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-}
-
-.error-feedback {
-  color: red;
-}
-
-.success-feedback {
-  color: green;
-}
-
-.inputs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.btn-class {
-  margin-top: 20px;
-  text-align: center;
-  display: flex;
-  margin-top: 20px;
-  text-align: center;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.btn-class h1 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.btn-class p {
-  color: #666;
-  margin-bottom: 20px;
-}
-
-button:hover {
-  background-color: #cc0000;
-}
-.red {
-  color: red;
-  font-size: 2rem;
-}
-.restinfo h1 {
-  line-height: 2rem;
-  text-align: justify;
-}
-</style>

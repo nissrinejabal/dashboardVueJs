@@ -1,6 +1,6 @@
 <template>
-  <div class="restaurant-item">
-    <div class="restaurant-info">
+  <div class="delete-form">
+    <div class="delete-form">
       <h1>Delete Restaurant #{{ deleteRestaurant }}</h1>
       <div class="inputs">
         <input
@@ -23,17 +23,17 @@
           disabled
         />
 
-        <div class="error-feedback" v-if="deleteRestSucc.length > 0">
-          {{ deleteRestSucc }}
+        <div class="error-feedback" v-if="successMessage.length > 0">
+          {{ successMessage }}
         </div>
-        <div class="error-feedback" v-if="deleteRestErr.length > 0">
-          {{ deleteRestErr }}
+        <div class="error-feedback" v-if="errorMessage.length > 0">
+          {{ errorMessage }}
         </div>
       </div>
     </div>
-    <div class="btn-class">
+    <div class="delete-verif">
       <p>Are you sure you want to delete?(this rest its cat its items)</p>
-      <button @click="deleteRest">Delete</button>
+      <button @click="deleteRest" class="delete">Delete</button>
 
       <button @click="goback">Go Back</button>
     </div>
@@ -55,8 +55,8 @@ export default {
       RestaurantData: [],
       AllItemsIdIs: [],
       AllICatgoriesIdIs: [],
-      deleteRestSucc: "",
-      deleteRestErr: "",
+      successMessage: "",
+      errorMessage: "",
     };
   },
   async mounted() {
@@ -146,14 +146,14 @@ export default {
         !allCatsResult.includes(false) &&
         !allItemsResult.includes(false)
       ) {
-        this.deleteRestErr = "";
-        this.deleteRestSucc = "tms7 mskine";
+        this.errorMessage = "";
+        this.successMessage = "tms7 mskine";
         setTimeout(() => {
           this.redirectTo({ val: "home" });
         }, 2000);
       } else {
-        this.deleteRestSucc = "";
-        this.deleteRestErr = "diksi matms7sh";
+        this.successMessage = "";
+        this.errorMessage = "diksi matms7sh";
         console.log("smtgh went wrong ");
       }
     },
@@ -161,32 +161,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.restaurant-item {
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  /* margin-bottom: 20px; */
-  /* background-color: #f9f9f9; */
-  /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-}
-
-.restaurant-info input[type="text"] {
-  /* width: calc(100% - 22px); */
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 5px;
-  background: #ededed;
-}
-
-.btn-class {
+<style>
+.delete-verif {
   margin-top: 20px;
   text-align: center;
   display: flex;
@@ -198,25 +174,25 @@ export default {
   gap: 1rem;
 }
 
-.btn-class h1 {
+.delete-verif h1 {
   font-size: 20px;
   margin-bottom: 10px;
   color: #333;
 }
 
-.btn-class p {
+.delete-verif p {
   color: #666;
   margin-bottom: 20px;
 }
 
-.inputs {
+.delete-form .inputs {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-button:hover {
+.delete:hover {
   background-color: #cc0000;
 }
 </style>
