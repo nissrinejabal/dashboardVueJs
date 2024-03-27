@@ -1,85 +1,93 @@
 <template>
   <NavbarComp />
-  <div class="header">
-    Restaurant id is {{ RestId }} and restname:{{ restname }}
-  </div>
-  <div class="routere">
-    <h1>Update New Item</h1>
+  <!-- <div class="rule">
     <router-link :to="{ name: 'Menu', params: { RestId: RestId } }">
       <button @click="viewAllCategories" class="btn-menu">
         go to the menu
       </button>
-    </router-link>
-    <button @click="goback">Go back home</button>
-    <button @click="goback">Go back</button>
-  </div>
-  <div class="category-container">
-    <h2>Update New item</h2>
-    <form @submit.prevent="updateItem">
-      <div class="form-group">
-        <label>Item Name:</label>
-        <input
-          type="text"
-          id="itemname"
-          v-model="itemname"
-          placeholder="itemname"
-        />
-        <span class="error-feedback" v-if="v$?.itemname?.$error">
-          {{ v$?.itemname?.$errors[0]?.$message }}
-        </span>
-      </div>
+    </router-link> 
+  </div> -->
+  <div class="update-delete-form">
+    <div class="update-delete-form">
+      <h1>
+        Restaurant <span> {{ restname }}</span> id :<span>{{ RestId }}</span>
+      </h1>
+      <form @submit.prevent="updateItem">
+        <div class="inputs-box">
+          <p class="parae">Item Name:</p>
+          <input
+            type="text"
+            class="input-box-update"
+            v-model="itemname"
+            placeholder="itemname"
+          />
+          <span class="error-feedback" v-if="v$?.itemname?.$error">
+            {{ v$?.itemname?.$errors[0]?.$message }}
+          </span>
 
-      <div class="form-group">
-        <label>Description:</label>
-        <textarea
-          id="description"
-          v-model="description"
-          placeholder="description"
-        ></textarea>
-        <span class="error-feedback" v-if="v$?.description?.$error">
-          {{ v$?.description?.$errors[0]?.$message }}
-        </span>
-      </div>
-      <div class="form-group">
-        <label>Price:</label>
-        <input type="text" id="price" v-model="price" placeholder="Price" />
-        <span class="error-feedback" v-if="v$?.price?.$error">
-          {{ v$?.price?.$errors[0]?.$message }}
-        </span>
-      </div>
-      <div class="form-group">
-        <label>Quantity:</label>
-        <input
-          type="number"
-          v-model.trim="Quantity"
-          placeholder="Quantity"
-          step="1"
-        />
-        <span class="error-feedback" v-if="v$?.Quantity?.$error">
-          {{ v$?.Quantity?.$errors[0]?.$message }}
-        </span>
-      </div>
-      <div class="form-group">
-        <label>Select Category:</label>
-        <select selected class="selected-items" v-model.trim="pickedCategory">
-          <option disabled>Please select a category</option>
-          <option v-for="(Cat, i) in ListOfCategories" :key="i" :value="Cat.id">
-            {{ Cat.categorieName }}
-            <!-- <h1>hhh id{{ pickedCategory }}</h1> -->
-          </option>
-        </select>
-      </div>
-      <span class="error-feedback" v-if="v$?.pickedCategory?.$error">
-        {{ v$?.pickedCategory?.$errors[0]?.$message }}
-      </span>
-      <br />
-      <span class="error-feedback"
-        >{{ errorMessage }} {{ successMessage }}</span
-      >
-      <div class="form-group2">
-        <button type="submit">Update item</button>
-      </div>
-    </form>
+          <p class="parae">Description:</p>
+          <textarea
+            class="input-box-update"
+            v-model="description"
+            placeholder="description"
+          >
+          </textarea>
+          <span class="error-feedback" v-if="v$?.description?.$error">
+            {{ v$?.description?.$errors[0]?.$message }}
+          </span>
+
+          <p class="parae">Price:</p>
+          <input
+            type="text"
+            class="input-box-update"
+            v-model="price"
+            placeholder="Price"
+          />
+          <span class="error-feedback" v-if="v$?.price?.$error">
+            {{ v$?.price?.$errors[0]?.$message }}
+          </span>
+
+          <p class="parae">Quantity:</p>
+          <input
+            class="input-box-update"
+            type="number"
+            v-model.trim="Quantity"
+            placeholder="Quantity"
+            step="1"
+          />
+          <span class="error-feedback" v-if="v$?.Quantity?.$error">
+            {{ v$?.Quantity?.$errors[0]?.$message }}
+          </span>
+
+          <p class="parae">Select Category:</p>
+          <select selected class="selected-items" v-model.trim="pickedCategory">
+            <option disabled>Please select a category</option>
+            <option
+              class="input-box-update"
+              v-for="(Cat, i) in ListOfCategories"
+              :key="i"
+              :value="Cat.id"
+            >
+              {{ Cat.categorieName }}
+              <!-- <h1>hhh id{{ pickedCategory }}</h1> -->
+            </option>
+          </select>
+          <span class="error-feedback" v-if="v$?.pickedCategory?.$error">
+            {{ v$?.pickedCategory?.$errors[0]?.$message }}
+          </span>
+          <br />
+          <span class="error-feedback"
+            >{{ errorMessage }} {{ successMessage }}</span
+          >
+          <p>Are you sure you want to update?</p>
+          <button type="submit">Update item</button>
+        </div>
+      </form>
+    </div>
+    <div class="update-verif">
+      <button class="btn-menu" @click="gobackMenu">Menu</button>
+      <button @click="goback">home</button>
+    </div>
   </div>
 </template>
 
@@ -292,77 +300,8 @@ export default {
 </script>
 
 <style scoped>
-.header {
-  text-align: center;
-  font-size: 1.5rem;
-  line-height: 5rem;
-}
-.add-item {
-  display: flex;
-  border: 2px solid;
-  max-width: 385px;
-  margin: 0px auto;
-  padding: 20px;
-  flex-direction: column;
-  align-items: center;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form {
-  /* Added this class to style the form container */
-  display: flex;
-  flex-direction: column;
-}
-
-.input-group {
-  margin-bottom: 15px;
-}
-
-label {
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="number"],
-textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
+/* 
 textarea {
   resize: vertical;
-}
-
-/* button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
 } */
-
-/* button:hover {
-  background-color: #0056b3;
-} */
-
-.error-feedback {
-  color: red;
-  margin-top: 5px;
-}
-.selected-items {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
 </style>

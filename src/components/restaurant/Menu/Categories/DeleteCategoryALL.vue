@@ -1,37 +1,37 @@
 <template>
   <div>
     <NavbarComp />
-    <div>
-      <div class="delete-form">
-        <div class="delete-form">
-          <h1 class="red">delete category and its items</h1>
-          <div class="inputs">
-            <input
-              type="text"
-              v-model.trim="restname"
-              placeholder="Restaurant Name"
-              disabled
-            />
-            <input
-              type="text"
-              v-model.trim="address"
-              placeholder="Address"
-              disabled
-            />
-            <div class="error-feedback" v-if="successMessage.length > 0">
-              {{ successMessage }}
-            </div>
-            <div class="error-feedback" v-if="errorMessage.length > 0">
-              {{ errorMessage }}
-            </div>
+    <div class="update-delete-form">
+      <div class="update-delete-form">
+        <h1 class="red">delete all</h1>
+        <div class="Delete-inputs-form">
+          <input
+            class="input-box-update"
+            type="text"
+            v-model.trim="restname"
+            placeholder="Restaurant Name"
+            disabled
+          />
+          <input
+            class="input-box-update"
+            type="text"
+            v-model.trim="address"
+            placeholder="Address"
+            disabled
+          />
+          <div class="error-feedback" v-if="successMessage.length > 0">
+            {{ successMessage }}
           </div>
-          <div class="delete-verif">
-            <p>Are you sure you want to delete?</p>
-            <button @click="deleteallcategory">
-              Delete all categories, related items at once
-            </button>
-            <button @click="goBack">Go Back</button>
+          <div class="error-feedback" v-if="errorMessage.length > 0">
+            {{ errorMessage }}
           </div>
+        </div>
+        <div class="delete-verif">
+          <p>Are you sure you want to delete? all the category and its items</p>
+          <button @click="deleteallcategory">
+            Delete all categories, related items at once
+          </button>
+          <button @click="goback">Go Back</button>
         </div>
       </div>
     </div>

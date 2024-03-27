@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1>page menu</h1>
-    <div class="page-menu">
+    <NavbarComp />
+    <div class="rule">
       <router-link
         :to="{ name: 'ShowListCatgoriesComp', params: { RestId: RestId } }"
       >
@@ -9,114 +9,123 @@
           View / add Category
         </button>
       </router-link>
-
       <router-link :to="{ name: 'AddItemsComp', params: { RestId: RestId } }">
         <button v-if="numOfCategories > 0" class="btn-menu">
           add new item
         </button>
       </router-link>
-      <div v-if="ListOfUserCategories.length > 0">
-        <button @click="showDeleteConfirmation">Delete All restaurant</button>
-        <!-- Delete confirmation popup -->
-        <div v-if="showPopup" class="popup-container">
-          <div class="popup">
-            <p>Are you sure you want to delete all items</p>
-            <button @click="deleteAllItems">OK</button>
-            <button @click="cancelDeletion">No</button>
-          </div>
-          <div class="inputs">
-            {{ successMessage }}
-            {{ errorMessage }}
-          </div>
-        </div>
-      </div>
       <button @click="goback">go back</button>
     </div>
-
-    <div class="restiteam">
+    <div class="info-list-first">
+      <!-- <div class="restiteam">
       <h1>restaurant name : {{ restname }}</h1>
       <h2>restaurant adress :{{ address }}</h2>
-    </div>
+    </div> -->
 
-    <div class="Info-list">
-      <h1>category List :</h1>
-      {{ ListOfUserCategories.length }} is list of categories
-      <ul class="category-list">
-        <li
-          v-for="Cat in ListOfUserCategories"
-          :key="Cat.id"
-          class="category-item"
-        >
-          <div class="category-info">
-            <h1>{{ Cat.categorieName }}</h1>
+      <div class="info-list-first">
+        <h1 class="header">category List</h1>
+        <div class="mycla">
+          <p v-if="ListOfUserCategories.length > 0">
+            list of categories ({{ ListOfUserCategories.length }})
+            <!-- hadi for all the resturant i have -->
+          </p>
+          <div v-else class="norestadded">no categories added</div>
+          <div>
+            <button @click="showDeleteConfirmation">
+              Delete All categories
+            </button>
+            <!-- Delete confirmation popup -->
+            <div v-if="showPopup" class="popup-container">
+              <div class="popup">
+                <p>
+                  Are you sure you want to delete all categoriess ?
+                  (rest,cat,items)
+                </p>
+                <br />
+                <button @click="deleteAllItems">OK</button>
+                <button @click="cancelDeletion">No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <ul class="category-list"> -->
+        <ul>
+          <li
+            v-for="Cat in ListOfUserCategories"
+            :key="Cat.id"
+            class="info-list"
+          >
+            <div class="global-info">
+              <h1>{{ Cat.categorieName }}</h1>
 
-            <div class="items-container">
-              <div v-for="(item, h) in ListOfUserItems" :key="h" class="item">
-                <div
-                  v-show="Cat.id == item.CatId"
-                  class="item-info"
-                  :class="{ showitems: Cat.id == item.CatId }"
-                >
+              <div class="items-container">
+                <div v-for="(item, h) in ListOfUserItems" :key="h" class="item">
                   <div
-                    v-if="Cat.id == item.CatId"
+                    v-show="Cat.id == item.CatId"
+                    class="item-info"
                     :class="{ showitems: Cat.id == item.CatId }"
                   >
-                    <h2>Name item: {{ item.itemname }}</h2>
-                    <p>item ID: {{ item.id }}</p>
-                    <p>{{ item.description }}</p>
-                    <div class="price-qty-container">
-                      <p class="price">
-                        Price: {{ numberWithCommas(item.price) }}
-                      </p>
-                      <p class="quantity">
-                        Qty: {{ numberWithCommas(item.Quantity) }}
-                      </p>
-                    </div>
+                    <div
+                      v-if="Cat.id == item.CatId"
+                      :class="{ showitems: Cat.id == item.CatId }"
+                    >
+                      <h2>Name item: {{ item.itemname }}</h2>
+                      <p>item ID: {{ item.id }}</p>
+                      <p>{{ item.description }}</p>
+                      <div class="price-qty-container">
+                        <p class="price">
+                          Price: {{ numberWithCommas(item.price) }}
+                        </p>
+                        <p class="quantity">
+                          Qty: {{ numberWithCommas(item.Quantity) }}
+                        </p>
+                      </div>
 
-                    <hr />
-                    <div class="router-link">
-                      <router-link
-                        :to="{
-                          name: 'UpadteItemsComp',
-                          params: { itemsId: item.id, RestId: RestId },
-                        }"
-                      >
-                        <button class="blue">Update Item <br /></button
-                      ></router-link>
-                      <router-link
-                        :to="{
-                          name: 'DeletetItemsComp',
-                          params: { itemsId: item.id, RestId: RestId },
-                        }"
-                      >
-                        <button class="red">delete Item <br /></button
-                      ></router-link>
-                    </div>
+                      <hr />
+                      <div class="button-container">
+                        <router-link
+                          :to="{
+                            name: 'UpadteItemsComp',
+                            params: { itemsId: item.id, RestId: RestId },
+                          }"
+                        >
+                          <button class="delete-btn showbtn">Update</button>
+                        </router-link>
+                        <router-link
+                          :to="{
+                            name: 'DeletetItemsComp',
+                            params: { itemsId: item.id, RestId: RestId },
+                          }"
+                        >
+                          <button class="showbtn">delete</button>
+                        </router-link>
+                      </div>
 
-                    <hr />
+                      <hr />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <!-- //// -->
-  <!-- <div>is user logged in {{ IsUserloggedIn }}</div>
+    <!-- //// -->
+    <!-- <div>is user logged in {{ IsUserloggedIn }}</div>
   <div>user id is {{ LoggedInUserId }}</div>
   <div>number of categories {{ numOfCategories }}</div>
   <div>categorie list {{ ListOfCategories }}</div> -->
 
-  <!-- ////// -->
+    <!-- ////// -->
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import { mapState, mapMutations, mapActions } from "vuex";
-
+import NavbarComp from "@/components/header/NavbarComp.vue";
 export default {
   data() {
     return {
@@ -270,7 +279,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .page-menu {
   display: flex;
   justify-content: space-between;
@@ -367,4 +376,4 @@ ul.category-list {
 .quantity {
   margin: 0; /* Remove default margin */
 }
-</style>
+</style> -->

@@ -1,18 +1,22 @@
 <template>
   <div>
     <NavbarComp />
-    <div class="info-list">
-      <div class="global-info">
-        <h1>
-          Delete Items id: {{ itemsId }} <br />
-          name Items: {{ itemname }}<br />
-        </h1>
-        <div class="restiteam">
-          <h1>restaurant name : {{ restname }}</h1>
-          <h2>restaurant adress :{{ address }}</h2>
-        </div>
-
-        <div class="inputs">
+    <div class="update-delete-form">
+      <div class="update-delete-form">
+        <h1>Delete Items {{ itemname }} id# {{ itemsId }} <br /></h1>
+        <div class="Delete-inputs-form">
+          <input
+            class="input-box-update"
+            type="text"
+            v-model.trim="restname"
+            disabled
+          />
+          <input
+            class="input-box-update"
+            type="text"
+            v-model.trim="address"
+            disabled
+          />
           <div class="error-feedback" v-if="successMessage.length > 0">
             {{ successMessage }}
           </div>
@@ -21,7 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="btn-class">
+      <div class="delete-verif">
         <p>Are you sure you want to delete?</p>
         <button @click="deleteCategory">Delete</button>
         <button @click="goBack">Go Back</button>

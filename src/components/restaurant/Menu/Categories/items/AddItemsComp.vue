@@ -1,85 +1,104 @@
 <template>
   <NavbarComp />
-  <div class="header">
-    Restaurant id is {{ RestId }} and restname:{{ restname }}
-  </div>
-  <div class="routere">
-    <h1>Add New Item</h1>
-    <router-link :to="{ name: 'Menu', params: { RestId: RestId } }">
-      <button @click="viewAllCategories" class="btn-menu">
-        go to the menu
-      </button>
-    </router-link>
-    <button @click="goback">Go back home</button>
-    <button @click="goback">Go back</button>
-  </div>
-  <div class="category-container">
-    <h2>Add New item</h2>
-    <form @submit.prevent="addItem">
-      <div class="form-group">
-        <label>Item Name:</label>
-        <input
-          type="text"
-          id="itemname"
-          v-model="itemname"
-          placeholder="itemname"
-        />
-        <span class="error-feedback" v-if="v$?.itemname?.$error">
-          {{ v$?.itemname?.$errors[0]?.$message }}
-        </span>
-      </div>
+  <div class="profile">
+    <div class="rule">
+      <h1>dashboard</h1>
+      <p>
+        Restaurant id : <span>{{ RestId }}</span
+        ><br />restname :
+        <span>{{ restname }}</span>
+      </p>
+      <button @click="gobackMenu" class="btn-menu">Menu</button>
+    </div>
 
-      <div class="form-group">
-        <label>Description:</label>
-        <textarea
-          id="description"
-          v-model="description"
-          placeholder="description"
-        ></textarea>
-        <span class="error-feedback" v-if="v$?.description?.$error">
-          {{ v$?.description?.$errors[0]?.$message }}
-        </span>
+    <div class="authentication-form">
+      <div class="card">
+        <div class="card2">
+          <h2>Add New item</h2>
+          <form @submit.prevent="addItem">
+            <div class="form-group">
+              <p class="parae">Item Name:</p>
+              <input
+                type="text"
+                class="response-box"
+                v-model="itemname"
+                placeholder="itemname"
+              />
+              <span class="error-feedback" v-if="v$?.itemname?.$error">
+                {{ v$?.itemname?.$errors[0]?.$message }}
+              </span>
+            </div>
+
+            <div class="form-group">
+              <p class="parae">Description:</p>
+              <textarea
+                class="response-box"
+                v-model="description"
+                placeholder="description"
+              ></textarea>
+              <span class="error-feedback" v-if="v$?.description?.$error">
+                {{ v$?.description?.$errors[0]?.$message }}
+              </span>
+            </div>
+            <div class="form-group">
+              <p class="parae">Price:</p>
+              <input
+                type="text"
+                class="response-box"
+                v-model="price"
+                placeholder="Price"
+              />
+              <span class="error-feedback" v-if="v$?.price?.$error">
+                {{ v$?.price?.$errors[0]?.$message }}
+              </span>
+            </div>
+            <div class="form-group">
+              <p class="parae">Quantity:</p>
+              <input
+                class="response-box"
+                type="number"
+                v-model.trim="Quantity"
+                placeholder="Quantity"
+                step="1"
+              />
+              <span class="error-feedback" v-if="v$?.Quantity?.$error">
+                {{ v$?.Quantity?.$errors[0]?.$message }}
+              </span>
+            </div>
+            <div class="form-group">
+              <p class="parae">Select Category:</p>
+              <select
+                selected
+                class="selected-items response-box"
+                v-model.trim="pickedCategory"
+                placeholder="Quantity"
+              >
+                <option disabled>Please select a category</option>
+                <option
+                  v-for="(Cat, i) in ListOfCategories"
+                  :key="i"
+                  :value="Cat.id"
+                >
+                  {{ Cat.categorieName }}
+                  <!-- <h1>hhh id{{ pickedCategory }}</h1> -->
+                </option>
+              </select>
+            </div>
+            <span class="error-feedback" v-if="v$?.pickedCategory?.$error">
+              {{ v$?.pickedCategory?.$errors[0]?.$message }}
+            </span>
+            <br />
+            <span class="error-feedback"
+              >{{ errorMessage }} {{ successMessage }}</span
+            >
+            <div class="btn-profile">
+              <button type="submit">Add item</button>
+              <button @click="gobackhome">Go back home</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Price:</label>
-        <input type="text" id="price" v-model="price" placeholder="Price" />
-        <span class="error-feedback" v-if="v$?.price?.$error">
-          {{ v$?.price?.$errors[0]?.$message }}
-        </span>
-      </div>
-      <div class="form-group">
-        <label>Quantity:</label>
-        <input
-          type="number"
-          v-model.trim="Quantity"
-          placeholder="Quantity"
-          step="1"
-        />
-        <span class="error-feedback" v-if="v$?.Quantity?.$error">
-          {{ v$?.Quantity?.$errors[0]?.$message }}
-        </span>
-      </div>
-      <div class="form-group">
-        <label>Select Category:</label>
-        <select selected class="selected-items" v-model.trim="pickedCategory">
-          <option disabled>Please select a category</option>
-          <option v-for="(Cat, i) in ListOfCategories" :key="i" :value="Cat.id">
-            {{ Cat.categorieName }}
-            <!-- <h1>hhh id{{ pickedCategory }}</h1> -->
-          </option>
-        </select>
-      </div>
-      <span class="error-feedback" v-if="v$?.pickedCategory?.$error">
-        {{ v$?.pickedCategory?.$errors[0]?.$message }}
-      </span>
-      <br />
-      <span class="error-feedback"
-        >{{ errorMessage }} {{ successMessage }}</span
-      >
-      <div class="form-group2">
-        <button type="submit">Add item</button>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -186,9 +205,7 @@ export default {
       "displayAllCategories",
       "canUserAccessThisRestaurant",
     ]),
-    goback() {
-      this.$router.go(-1);
-    },
+
     async DisplayUserCategories(userId, restaurantId) {
       let result = await axios.get(
         `http://localhost:3000/categories?userId=${userId}&RestId=${restaurantId}`
@@ -211,7 +228,12 @@ export default {
         // array fi object
       }
     },
-
+    gobackhome() {
+      this.$router.push({ name: "home", params: { RestId: this.RestId } });
+    },
+    gobackMenu() {
+      this.$router.push({ name: "Menu", params: { RestId: this.RestId } });
+    },
     async addItem() {
       this.v$.$validate();
       if (!this.v$.$error) {
@@ -251,16 +273,17 @@ export default {
       }
     },
   },
-  gobackMenu() {
-    this.$router.push({ name: "Menu", params: { RestId: this.RestId } });
-  },
-  goback() {
-    this.$router.go(-1);
-  },
 };
 </script>
-
 <style scoped>
+.authentication-form {
+  height: 72vh;
+}
+.card {
+  height: 602px;
+}
+</style>
+<!-- <style scoped>
 .header {
   text-align: center;
   font-size: 1.5rem;
@@ -334,4 +357,4 @@ textarea {
   border-radius: 5px;
   font-size: 16px;
 }
-</style>
+</style> -->

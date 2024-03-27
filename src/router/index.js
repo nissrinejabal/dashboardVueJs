@@ -1,20 +1,24 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ErrorpageView from "../views/ErrorpageView.vue"
+import ExampleView from "../views/ExampleView.vue"
+// sign pages
 import SignupView from '../views/Profile/SignupView.vue'
 import LoginView from "../views/Profile/LoginView.vue"
 import ProfileView from "../views/Profile/ProfileView.vue"
-import ErrorpageView from "../views/ErrorpageView.vue"
-import addnewrestaurantView from "../views/restuarant/addnewrestaurantView.vue"
-import DeleteRestaurant from "../views/restuarant/DeleteRestaurant.vue"
-import ExampleView from "../views/ExampleView.vue"
-import UpdaterestaurantView from "../views/restuarant/UpdaterestaurantView.vue"
-import MenurestView from "../views/restuarant/MenurestView.vue"
+// restaurant pages
+import AddnewrestComp from "../components/restaurant/AddnewrestComp.vue"
+import DeleteRestaurantComp from "../components/restaurant/DeleteRestaurantComp.vue"
+import UpdaterestComp from "../components/restaurant/UpdaterestComp.vue"
+// menu pages
+import MenuView from "../views/MenuView.vue" 
+// categories pages
 import AddNewCatgoryComp from "../components/restaurant/Menu/Categories/AddNewCatgoryComp.vue"
 import ShowListCatgoriesComp from "../components/restaurant/Menu/ShowListCatgoriesComp.vue"
 import UpdateCategory from '@/components/restaurant/Menu/Categories/UpdateCategory.vue'
 import DeleteCategory from '@/components/restaurant/Menu/Categories/DeleteCategory.vue'
 import DeleteCategoryALL from '@/components/restaurant/Menu/Categories/DeleteCategoryALL.vue'
-
+// items pages
 import UpadteItemsComp from'@/components/restaurant/Menu/Categories/items/UpadteItemsComp.vue'
 import AddItemsComp from'@/components/restaurant/Menu/Categories/items/AddItemsComp.vue'
 import DeletetItemsComp from'@/components/restaurant/Menu/Categories/items/DeletetItemsComp.vue'
@@ -52,23 +56,23 @@ const routes = [
   {
     path: '/add',
     name: 'addres',
-    component: addnewrestaurantView
+    component: AddnewrestComp
   },
   {
     path: '/delete/:RestId',
     name: 'DeleteRestaurant',
-    component: DeleteRestaurant
+    component: DeleteRestaurantComp
   },
   {
     path: '/UpdateRest/:RestId',
     name: 'Updaterestaurant',
-    component: UpdaterestaurantView
+    component: UpdaterestComp
   },
   {
     path: '/Restaurant/menu/:RestId',
     //params howa RestId look at page addItemsComp u will understand 
     name: 'Menu',
-    component: MenurestView
+    component: MenuView
   },
   {
     path: '/NewCategory/Restaurant/Catgories/:RestId',

@@ -12,7 +12,7 @@
       <button @click="viewCategory">go back menu(rja3 bmo)</button>
     </router-link>
   </div>
-  <div class="Info-list">
+  <div class="info-list-first">
     <h1>Categories List :</h1>
     <div class="mycla">
       <p class="listheader" v-if="numOfCategories > 0">

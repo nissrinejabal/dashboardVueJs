@@ -28,46 +28,23 @@
       "phone": "NEW ONE",
       "address": "NEW ONE",
       "userId": 2
-    },
-    {
-      "id": "ac56",
-      "restname": "new restar",
-      "phone": 4354435,
-      "address": "adress",
-      "userId": null
     }
   ],
   "categories": [
     {
-      "categorieName": "nissrinef cat",
-      "userId": 1,
-      "RestId": 1,
-      "id": "1"
-    },
-    {
-      "categorieName": "nissrinef",
-      "userId": 1,
-      "RestId": 1,
-      "id": "2"
-    },
-    {
       "categorieName": "2",
       "userId": 1,
       "RestId": 2,
-      "id": "3"
+      "id": "1"
+    },
+    {
+      "categorieName": "name of the cat 2",
+      "userId": 1,
+      "RestId": 1,
+      "id": "2"
     }
   ],
   "items": [
-    {
-      "itemname": "1234",
-      "price": "10.99",
-      "description": "Delicious burger with cheese and veggies",
-      "Quantity": "5",
-      "RestId": 1,
-      "userId": 1,
-      "CatId": 1,
-      "id": "1"
-    },
     {
       "itemname": "345",
       "price": "10.99",

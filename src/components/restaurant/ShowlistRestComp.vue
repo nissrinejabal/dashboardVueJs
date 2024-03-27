@@ -1,7 +1,8 @@
 <template>
-  <div class="Info-list">
+  <NavbarComp />
+  <div class="info-list-first">
     <!-- hada comp child wlidat  -->
-    <h1>Restaurant List</h1>
+    <h1 class="header">Restaurant List</h1>
     <!-- <p>{{ allRestaurant }}</p> -->
 
     <div class="mycla">
@@ -89,6 +90,8 @@
       </tr>
     </tbody> -->
 <script>
+import NavbarComp from "../header/NavbarComp.vue";
+
 import axios from "axios";
 export default {
   props: ["allRestaurant"],
@@ -211,9 +214,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-</style>
+<style scoped></style>

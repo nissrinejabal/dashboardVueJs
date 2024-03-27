@@ -1,26 +1,36 @@
 <template>
   <NavbarComp />
-  <div class="category-container">
-    <h2>Update New Category</h2>
-    <form @submit.prevent="updateCategory">
-      <div class="form-group">
-        <label>Category Name:</label>
-        <input
-          type="text"
-          placeholder="Category name"
-          v-model.trim="categorieName"
-        />
-        <span class="error-feedback" v-if="v$?.categorieName?.$error">
-          {{ v$?.categorieName?.$errors[0]?.$message }}
-        </span>
-        <span class="error-feedback"
-          >{{ errorMessage }} {{ successMessage }}</span
-        >
-      </div>
-      <div class="form-group2">
-        <button type="submit">Update Category</button>
-      </div>
-    </form>
+  <div class="update-delete-form">
+    <div class="update-delete-form">
+      <h1>
+        Update Category # <span>{{ CatId }}</span>
+      </h1>
+      <form @submit.prevent="add">
+        <div class="inputs-box">
+          <p>Category name</p>
+          <input
+            class="input-box-update"
+            type="text"
+            v-model.trim="categorieName"
+            placeholder="Category name"
+          />
+          <span class="error-feedback" v-if="v$.categorieName.$error">
+            {{ v$.categorieName.$errors[0].$message }}
+          </span>
+
+          <!-- ////////////////////////// -->
+          <span class="error-feedback"
+            >{{ errorMessage }} {{ successMessage }}</span
+          >
+          <p>Are you sure you want to update?</p>
+          <button @click="updateCategory">Update</button>
+        </div>
+      </form>
+    </div>
+    <div class="update-verif">
+      <button class="btn-menu" @click="gobackMenu">Menu</button>
+      <button @click="goback">home</button>
+    </div>
   </div>
 </template>
 
@@ -179,9 +189,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.error-feedback {
-  color: red;
-}
-</style>

@@ -1,10 +1,17 @@
 <template>
   <NavbarComp />
-  <div class="delete-form">
-    <div class="delete-form">
-      <h1>Delete Category #{{ CatId }}</h1>
-      <div class="inputs">
-        <input type="text" v-model.trim="categorieName" disabled />
+  <div class="update-delete-form">
+    <div class="update-delete-form">
+      <h1>
+        Delete Category # <span> {{ CatId }}</span>
+      </h1>
+      <div class="Delete-inputs-form">
+        <input
+          class="input-box-update"
+          type="text"
+          v-model.trim="categorieName"
+          disabled
+        />
         <div class="error-feedback" v-if="successMessage.length > 0">
           {{ successMessage }}
         </div>
@@ -13,10 +20,10 @@
         </div>
       </div>
     </div>
+
     <div class="delete-verif">
       <p>Are you sure you want to delete?(this rest its cat its items)</p>
       <button @click="deleteCategory" class="delete">Delete</button>
-
       <button @click="goback">Go Back</button>
     </div>
   </div>
@@ -130,23 +137,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.info-list {
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-}
-
-.error-feedback {
-  color: red;
-}
-
-.success-feedback {
-  color: green;
-}
-</style>

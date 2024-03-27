@@ -61,7 +61,9 @@
                 {{ v$.password.$errors[0].$message }}
               </span>
               <br />
-              <span class="error-feedback">{{ UpdateErr }}</span>
+              <span class="error-feedback"
+                >{{ errorMessage }} {{ successMessage }}</span
+              >
             </p>
             <div class="btn-profile">
               <button type="submit" @click="update()">Update</button>
@@ -91,7 +93,8 @@ export default {
       avatar: "",
       showUpdateForm: false,
       userId: "",
-      UpdateErr: "",
+      errorMessage: "",
+      successMessage: "",
     };
   },
   validations() {
@@ -118,53 +121,47 @@ export default {
   },
   methods: {
     ...mapActions(["redirectTo"]),
-    async update() {
-      this.v$.$validate();
-      if (!this.v$.$error) {
-        try {
-          let result = await axios.put(
-            `http://localhost:3000/users/${this.userId}`,
-            {
-              name: this.name,
-              password: this.password,
-              email: this.email,
-            }
-          );
-          if (result.status === 200) {
-            localStorage.setItem("user-info", JSON.stringify(result.data));
-
-            window.location.reload();
-            // this.$router.push({
-            //   name: "home",
-            //   params: { pageTitle: "profile page" },
-            // });
-          } else {
-            console.log("profile not updated");
-            this.UpdateErr = "user not updated";
-          }
-        } catch (error) {
-          console.log("madazetsh lvalidation form");
-          this.UpdateErr = "try again, refresh ";
-        }
-      }
-    },
-    // toggleUpdateForm() {
-    //   this.showUpdateForm = !this.showUpdateForm;
-    // },
     goback() {
       this.redirectTo({ val: "home" });
     },
+    async update() {
+      this.v$.$validate();
+      if (!this.v$.$error) {
+        let result = await axios.put(
+          `http://localhost:3000/users/${this.userId}`,
+          {
+            name: this.name,
+            password: this.password,
+            email: this.email,
+          }
+        );
+        if (result.status === 200) {
+          localStorage.setItem("user-info", JSON.stringify(result.data));
+
+          window.location.reload();
+          // this.$router.push({
+          //   name: "home",
+          //   params: { pageTitle: "profile page" },
+          // });
+        } else {
+          console.log("profile not updated");
+          this.errorMessage = "user not updated";
+          this.successMessage = "";
+        }
+      } else {
+        console.log("madazetsh lvalidation form");
+        this.errorMessage = "try again";
+        this.successMessage = "";
+      }
+    },
   },
+  // toggleUpdateForm() {
+  //   this.showUpdateForm = !this.showUpdateForm;
+  // },
 };
 </script>
 <style scoped>
 .authentication-form {
   height: 55vh;
-}
-
-.btn-profile {
-  margin: 0 10px;
-  display: flex;
-  justify-content: space-between;
 }
 </style>

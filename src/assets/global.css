@@ -5,6 +5,9 @@ body {
   color: #fdeff4;
   font-family: sans-serif;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='800' preserveAspectRatio='none' viewBox='0 0 1440 800'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1029%26quot%3b)' fill='none'%3e%3crect width='1440' height='800' x='0' y='0' fill='rgba(31%2c 34%2c 34%2c 1)'%3e%3c/rect%3e%3cpath d='M-247.02 431.51C-59.94 445.69 125.83 800.93 397.75 815.51 669.67 830.09 634.41 930.78 720.14 932.57' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M-20.06 520.24C99.27 520.8 213.31 620.24 446.68 620.24 680.05 620.24 671.82 518.08 913.42 520.24 1155.02 522.4 1235.48 851.79 1380.16 870.54' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M-215.22 298.91C-31.01 310.83 139.21 629.26 429.44 658.91 719.67 688.56 644.84 931.32 751.77 952.12' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M-161.92 275.5C26.04 283.34 140.78 578.18 519.14 595.5 897.51 612.82 1009.77 929.29 1200.21 938.82' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M-177.45 215.96C-8.4 221.86 90.19 466.7 442.06 487.96 793.94 509.22 877.86 872.06 1061.58 889.06' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1029'%3e%3crect width='1440' height='800' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: unset;
+  background-size: cover;
 }
 
 h2 {
@@ -66,11 +69,21 @@ button:hover {
 button:active {
   transform: translateY(-1px);
 }
+span {
+  color: red;
+}
+/**generale**/
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
 /*error section*/
 .error-feedback {
+  padding-top: 12px;
   color: red;
 }
 .success-feedback {
+  padding-top: 12px;
   color: green;
 }
 /*sign-up login css*/
@@ -84,18 +97,15 @@ button:active {
   /* margin: 8% auto 0; */
 }
 .card2 {
-  /* width: 391px; */
   height: 481px;
   border-radius: 20px;
   transition: all 0.2s;
   padding: 0px;
 }
-
 .card2:hover {
   transform: scale(0.97);
   border-radius: 20px;
 }
-
 .card:hover {
   box-shadow: 0px 0px 30px 1px rgba(0, 255, 117, 0.3);
 }
@@ -137,7 +147,11 @@ button:active {
   display: flex;
   align-items: center;
 }
-
+.btn-profile {
+  margin: 0 10px;
+  display: flex;
+  justify-content: space-between;
+}
 .avatar {
   margin-right: 20px;
 }
@@ -168,11 +182,8 @@ button:active {
   justify-content: space-between;
   margin: 10px;
 }
-.rule button {
-  padding: 1.3em 1.2em;
-}
-/*i dont know why the info list is still showing in here duplicate try to find out why  */
-.Info-list {
+/*for the tables -show pages*/
+.info-list-first {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -185,10 +196,11 @@ button:active {
   display: flex;
   justify-content: space-between;
 }
-
 .global-info {
   flex: 1;
 }
+
+/***btn**/
 .showbtn {
   margin-left: 10px;
   padding: 8px 16px;
@@ -217,27 +229,65 @@ button:active {
   display: flex;
   align-items: center;
 }
-/*delete css */
-.delete-form {
+/*for the update btn*/
+.update-verif {
+  display: flex;
+  margin-top: 20px;
+  gap: 1rem;
+}
+.delete-verif {
+  display: flex;
+  margin-top: 20px;
+  gap: 1rem;
+  flex-direction: column;
+}
+button.delete:hover {
+  box-shadow: none;
+  background-color: #cc0000;
+}
+/*update css**********************************************/
+
+.update-delete-form {
   display: flex;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 20px;
   flex-direction: column;
-  align-content: center;
   align-items: center;
 }
-.delete-form input[type="text"] {
-  /* width: calc(100% - 22px); */
-  display: flex;
-  flex-direction: column;
+.selected-items {
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin-top: 5px;
-  background: #ededed;
+  font-size: 16px;
 }
-
+.input-box-update {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+}
+.inputs-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+/*chofi niss hadi lilfo9 w hadik lilta7t rah nefs lhaja to check it again*/
+/*delete css ************************************/
+.input-box-update:disabled {
+  color: #fff;
+  background-color: #a09f9f69;
+}
+.Delete-inputs-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+}
 /*////////////for the delete all pop up ///////////////////*/
 /* Styles for the delete confirmation popup container */
 .popup-container {
@@ -251,7 +301,6 @@ button:active {
   justify-content: center;
   align-items: center;
 }
-
 /* Styles for the delete confirmation popup */
 .popup {
   border-radius: 5px;
@@ -262,7 +311,6 @@ button:active {
   padding: 1rem;
   margin: 1px;
 }
-
 /* Styles for the buttons in the delete confirmation popup */
 .popup button {
   margin: 0 10px;
@@ -292,12 +340,15 @@ button:active {
     flex-direction: column;
   }
   /* Original styles */
-  .Info-list {
+  .info-list-first {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
   }
   .button-container {
     justify-content: center;
+  }
+  .update-verif {
+    flex-direction: column;
   }
 }

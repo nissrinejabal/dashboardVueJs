@@ -1,30 +1,45 @@
 <template>
   <NavbarComp />
-  <div class="routere">
-    <div>Restaurant id is {{ RestId }}</div>
-    <button @click="goback">Go back home</button>
-  </div>
-  <div class="category-container">
-    <h2>Add New Category</h2>
-    <form @submit.prevent="addCategory">
-      <div class="form-group">
-        <label>Category Name:</label>
-        <input
-          type="text"
-          placeholder="Category name"
-          v-model.trim="categorieName"
-        />
-        <span class="error-feedback" v-if="v$?.categorieName?.$error">
-          {{ v$?.categorieName?.$errors[0]?.$message }}
-        </span>
-        <span class="error-feedback"
-          >{{ errorMessage }} {{ successMessage }}</span
-        >
+
+  <div class="profile">
+    <div class="rule">
+      <h1>dashboard</h1>
+      <p>
+        Restaurant id : <span>{{ RestId }}</span
+        ><br />restname :
+        <span>{{ restname }}</span>
+      </p>
+      <button @click="gobackMenu">Menu</button>
+    </div>
+
+    <div class="authentication-form">
+      <div class="card">
+        <div class="card2">
+          <h2>add new Category</h2>
+          <form @submit.prevent="addCategory">
+            <p class="parae">Category name</p>
+            <p>
+              <input
+                type="nom"
+                class="response-box"
+                placeholder="Category name"
+                v-model.trim="categorieName"
+              />
+              <br />
+              <br />
+              <span class="error-feedback" v-if="v$.categorieName.$error">
+                {{ v$.categorieName.$errors[0].$message }}
+              </span>
+            </p>
+          </form>
+          <div class="btn-profile">
+            <button type="submit" @click="addCategory()">add</button>
+            <button @click="gobackhome">Go back home</button>
+          </div>
+        </div>
       </div>
-      <div class="form-group2">
-        <button type="submit">Add Category</button>
-      </div>
-    </form>
+      <!-- <div v-if="showaddrestForm" class="sign-up"></div> -->
+    </div>
   </div>
 </template>
 
@@ -89,9 +104,7 @@ export default {
       "displayAllCategories",
       "canUserAccessThisRestaurant",
     ]),
-    goback() {
-      this.$router.go(-1);
-    },
+
     async DisplayUserCategories(userId, restaurantId) {
       let result = await axios.get(
         `http://localhost:3000/categories?userId=${userId}&RestId=${restaurantId}`
@@ -153,40 +166,20 @@ export default {
         this.successMessage = "";
       }
     },
+    gobackMenu() {
+      this.$router.push({ name: "Menu", params: { RestId: this.RestId } });
+    },
+    gobackhome() {
+      this.$router.push({ name: "home", params: { RestId: this.RestId } });
+    },
   },
 };
 </script>
-
-<style>
-.category-container {
-  display: flex;
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  flex-direction: column;
-  align-items: center;
+<style scoped>
+.authentication-form {
+  height: 35vh;
 }
-
-.category-container h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.form-group2 {
-  text-align: center;
-  margin: 20px;
-}
-
-label {
-  font-weight: bold;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.card {
+  height: 250px;
 }
 </style>

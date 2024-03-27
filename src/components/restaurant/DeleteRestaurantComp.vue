@@ -1,22 +1,34 @@
 <template>
-  <div class="delete-form">
-    <div class="delete-form">
-      <h1>Delete Restaurant #{{ deleteRestaurant }}</h1>
-      <div class="inputs">
+  <NavbarComp />
+  <div class="update-delete-form">
+    <div class="update-delete-form">
+      <h1>
+        Delete Restaurant # <span>{{ deleteRestaurant }}</span>
+      </h1>
+      <div class="Delete-inputs-form">
         <input
+          class="input-box-update"
           type="text"
           v-model.trim="restname"
           placeholder="Restaurant Name"
           disabled
         />
-        <input type="text" v-model.trim="phone" placeholder="Phone" disabled />
         <input
+          class="input-box-update"
+          type="text"
+          v-model.trim="phone"
+          placeholder="Phone"
+          disabled
+        />
+        <input
+          class="input-box-update"
           type="text"
           v-model.trim="address"
           placeholder="Address"
           disabled
         />
         <input
+          class="input-box-update"
           type="text"
           v-model.trim="userId"
           placeholder="User ID"
@@ -34,13 +46,13 @@
     <div class="delete-verif">
       <p>Are you sure you want to delete?(this rest its cat its items)</p>
       <button @click="deleteRest" class="delete">Delete</button>
-
       <button @click="goback">Go Back</button>
     </div>
   </div>
 </template>
 
 <script>
+import NavbarComp from "../header/NavbarComp.vue";
 import axios from "axios";
 import { mapActions } from "vuex";
 
@@ -160,39 +172,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.delete-verif {
-  margin-top: 20px;
-  text-align: center;
-  display: flex;
-  margin-top: 20px;
-  text-align: center;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.delete-verif h1 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.delete-verif p {
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.delete-form .inputs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.delete:hover {
-  background-color: #cc0000;
-}
-</style>

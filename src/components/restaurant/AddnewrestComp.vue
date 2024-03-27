@@ -1,8 +1,12 @@
 <template>
+  <NavbarComp />
   <!-- Profile display -->
   <div class="profile">
     <!-- Update form -->
-    <h1>dashboard</h1>
+    <div class="rule">
+      <h1>dashboard</h1>
+      <button @click="gobackMenu">home</button>
+    </div>
     <div class="authentication-form">
       <div class="card">
         <div class="card2">
@@ -50,17 +54,12 @@
                 {{ v$.address.$errors[0].$message }}
               </span>
               <br />
-              <span class="error-feedback">{{ UpdateErr }}</span>
-            </p>
-            <div class="btn-profile">
-              <button type="submit" @click="addrest()">add</button>
-              <button @click="goback">go back home</button>
-              <br />
-              <br />
-              <br />
               <span class="error-feedback"
                 >{{ errorMessage }} {{ successMessage }}</span
               >
+            </p>
+            <div class="btn-profile">
+              <button type="submit" @click="addrest()">add</button>
             </div>
           </form>
         </div>
@@ -160,7 +159,7 @@ export default {
       }
     },
 
-    goback() {
+    gobackMenu() {
       this.redirectTo({ val: "home" });
     },
   },
@@ -170,5 +169,8 @@ export default {
 <style scoped>
 .authentication-form {
   height: 60vh;
+}
+.btn-profile {
+  justify-content: center;
 }
 </style>

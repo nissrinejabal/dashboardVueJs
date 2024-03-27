@@ -1,11 +1,15 @@
 <template>
-  <div class="info-list">
-    <div class="global-info">
-      <h1>Update Restaurant #{{ UpdateRestaurant }}</h1>
+  <NavbarComp />
+  <div class="update-delete-form">
+    <div class="update-delete-form">
+      <h1>
+        Update Restaurant # <span>{{ RestId }}</span>
+      </h1>
       <form @submit.prevent="add">
-        <div class="inputs">
+        <div class="inputs-box">
           <p>Restaurant name</p>
           <input
+            class="input-box-update"
             type="text"
             v-model.trim="state.restname"
             placeholder="restaurant name"
@@ -14,13 +18,19 @@
             {{ v$.restname.$errors[0].$message }}
           </span>
           <p>Restaurant phone</p>
-          <input type="text" v-model.trim="state.phone" placeholder="Phone" />
+          <input
+            class="input-box-update"
+            type="text"
+            v-model.trim="state.phone"
+            placeholder="Phone"
+          />
           <span class="error-feedback" v-if="v$.phone.$error">
             {{ v$.phone.$errors[0].$message }}
           </span>
           <!-- /////////////// -->
           <p>Restaurant address</p>
           <input
+            class="input-box-update"
             type="text"
             v-model.trim="state.address"
             placeholder="address"
@@ -30,18 +40,20 @@
           </span>
           <!-- ////////////////////////// -->
 
-          <div class="error-feedback" v-if="UpdateRestSucc.length > 0">
-            {{ UpdateRestSucc }}
+          <div class="error-feedback" v-if="successMessage.length > 0">
+            {{ successMessage }}
           </div>
-          <div class="error-feedback" v-if="UpdateRestErr.length > 0">
-            {{ UpdateRestErr }}
+          <div class="error-feedback" v-if="errorMessage.length > 0">
+            {{ errorMessage }}
           </div>
-        </div>
-        <div class="btn-class">
+          <p>Are you sure you want to update?</p>
           <button @click="UpdateRest">Update</button>
-          <button @click="goback">Go Back</button>
         </div>
       </form>
+    </div>
+    <div class="update-verif">
+      <button class="btn-menu" @click="gobackMenu">Menu</button>
+      <button @click="goback">home</button>
     </div>
   </div>
 </template>
@@ -52,8 +64,10 @@ import { mapActions } from "vuex";
 import { required, email } from "@vuelidate/validators";
 import { computed, reactive } from "vue";
 import axios from "axios";
+import NavbarComp from "../header/NavbarComp.vue";
 
 export default {
+  components: { NavbarComp },
   setup() {
     const state = reactive({
       restname: "",
@@ -77,8 +91,8 @@ export default {
     return {
       RestId: "",
       userId: "",
-      UpdateRestSucc: "",
-      UpdateRestErr: "",
+      successMessage: "",
+      errorMessage: "",
     };
   },
   validations() {},
@@ -129,14 +143,14 @@ export default {
           }
         );
         if (result.status == 200) {
-          this.UpdateRestErr = "";
-          this.UpdateRestSucc = "updated restaurant ";
+          this.errorMessage = "";
+          this.successMessage = "updated restaurant ";
           setTimeout(() => {
             this.redirectTo({ val: "home" });
           }, 2000);
         } else {
-          this.UpdateRestSucc = "";
-          this.UpdateRestErr = "not updated wit wit";
+          this.successMessage = "";
+          this.errorMessage = "not updated wit wit";
           console.log("smtgh went wrong ");
         }
       }
@@ -144,63 +158,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.info-list {
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 20px;
-  /* margin-bottom: 20px; */
-  /* background-color: #f9f9f9; */
-  /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
-  flex-direction: column;
-  align-content: center;
-  align-items: center;
-}
-
-.global-info input[type="text"] {
-  /* width: calc(100% - 22px); */
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-top: 5px;
-  background: #ededed;
-}
-
-.btn-class {
-  margin-top: 20px;
-  text-align: center;
-  display: flex;
-  margin-top: 20px;
-  text-align: center;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.btn-class h1 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.btn-class p {
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.inputs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-button:hover {
-  background-color: #cc0000;
-}
-</style>
