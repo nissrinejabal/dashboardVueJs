@@ -5,111 +5,93 @@
       <router-link
         :to="{ name: 'ShowListCatgoriesComp', params: { RestId: RestId } }"
       >
-        <button @click="viewAllCategories" class="btn-menu">
-          View / add Category
-        </button>
+        <button @click="viewAllCategories">View / add Category</button>
       </router-link>
       <router-link :to="{ name: 'AddItemsComp', params: { RestId: RestId } }">
-        <button v-if="numOfCategories > 0" class="btn-menu">
-          add new item
-        </button>
+        <button v-if="numOfCategories > 0">add new item</button>
       </router-link>
       <button @click="goback">go back</button>
     </div>
     <div class="info-list-first">
-      <!-- <div class="restiteam">
-      <h1>restaurant name : {{ restname }}</h1>
-      <h2>restaurant adress :{{ address }}</h2>
-    </div> -->
+      <h1 class="header">category List</h1>
 
-      <div class="info-list-first">
-        <h1 class="header">category List</h1>
-        <div class="mycla">
-          <p v-if="ListOfUserCategories.length > 0">
-            list of categories ({{ ListOfUserCategories.length }})
-            <!-- hadi for all the resturant i have -->
-          </p>
-          <div v-else class="norestadded">no categories added</div>
-          <div>
-            <button @click="showDeleteConfirmation">
-              Delete All categories
-            </button>
-            <!-- Delete confirmation popup -->
-            <div v-if="showPopup" class="popup-container">
-              <div class="popup">
-                <p>
-                  Are you sure you want to delete all categoriess ?
-                  (rest,cat,items)
-                </p>
-                <br />
-                <button @click="deleteAllItems">OK</button>
-                <button @click="cancelDeletion">No</button>
-              </div>
+      <div class="mycla">
+        <p v-if="ListOfUserCategories.length > 0">
+          list of categories ({{ ListOfUserCategories.length }})
+          <!-- hadi for all the resturant i have -->
+        </p>
+        <div v-else class="norestadded">no categories added</div>
+
+        <p>
+          restaurant :<span>{{ restname }}</span> <br />
+          adress : <span>{{ address }}</span>
+        </p>
+
+        <div>
+          <button @click="showDeleteConfirmation">Delete All categories</button>
+          <!-- Delete confirmation popup -->
+          <div v-if="showPopup" class="popup-container">
+            <div class="popup">
+              <p>
+                Are you sure you want to delete all categoriess ?
+                (rest,cat,items)
+              </p>
+              <br />
+              <button @click="deleteAllItems">OK</button>
+              <button @click="cancelDeletion">No</button>
             </div>
           </div>
         </div>
-        <!-- <ul class="category-list"> -->
-        <ul>
-          <li
-            v-for="Cat in ListOfUserCategories"
-            :key="Cat.id"
-            class="info-list"
-          >
-            <div class="global-info">
-              <h1>{{ Cat.categorieName }}</h1>
-
-              <div class="items-container">
-                <div v-for="(item, h) in ListOfUserItems" :key="h" class="item">
-                  <div
-                    v-show="Cat.id == item.CatId"
-                    class="item-info"
-                    :class="{ showitems: Cat.id == item.CatId }"
-                  >
-                    <div
-                      v-if="Cat.id == item.CatId"
-                      :class="{ showitems: Cat.id == item.CatId }"
-                    >
-                      <h2>Name item: {{ item.itemname }}</h2>
-                      <p>item ID: {{ item.id }}</p>
-                      <p>{{ item.description }}</p>
-                      <div class="price-qty-container">
-                        <p class="price">
-                          Price: {{ numberWithCommas(item.price) }}
-                        </p>
-                        <p class="quantity">
-                          Qty: {{ numberWithCommas(item.Quantity) }}
-                        </p>
-                      </div>
-
-                      <hr />
-                      <div class="button-container">
-                        <router-link
-                          :to="{
-                            name: 'UpadteItemsComp',
-                            params: { itemsId: item.id, RestId: RestId },
-                          }"
-                        >
-                          <button class="delete-btn showbtn">Update</button>
-                        </router-link>
-                        <router-link
-                          :to="{
-                            name: 'DeletetItemsComp',
-                            params: { itemsId: item.id, RestId: RestId },
-                          }"
-                        >
-                          <button class="showbtn">delete</button>
-                        </router-link>
-                      </div>
-
-                      <hr />
-                    </div>
+      </div>
+      <!-- <ul class="category-list"> -->
+      <ul>
+        <li v-for="Cat in ListOfUserCategories" :key="Cat.id" class="info-list">
+          <div class="global-info">
+            <h1>{{ Cat.categorieName }}</h1>
+            <div v-for="(item, h) in ListOfUserItems" :key="h">
+              <div
+                v-show="Cat.id == item.CatId"
+                :class="{ showitems: Cat.id == item.CatId }"
+              >
+                <div
+                  v-if="Cat.id == item.CatId"
+                  :class="{ showitems: Cat.id == item.CatId }"
+                >
+                  <h2>Name item: {{ item.itemname }}</h2>
+                  <p>item ID: {{ item.id }}</p>
+                  <p>{{ item.description }}</p>
+                  <div class="price-qty-container">
+                    <p>Price: {{ numberWithCommas(item.price) }}</p>
+                    <p>Qty: {{ numberWithCommas(item.Quantity) }}</p>
                   </div>
+
+                  <hr />
+                  <div class="button-container">
+                    <router-link
+                      :to="{
+                        name: 'UpadteItemsComp',
+                        params: { itemsId: item.id, RestId: RestId },
+                      }"
+                    >
+                      <button>Update</button>
+                    </router-link>
+                    <router-link
+                      :to="{
+                        name: 'DeletetItemsComp',
+                        params: { itemsId: item.id, RestId: RestId },
+                      }"
+                    >
+                      <button class="delete-btn">delete</button>
+                    </router-link>
+                  </div>
+
+                  <hr />
                 </div>
               </div>
             </div>
-          </li>
-        </ul>
-      </div>
+          </div>
+        </li>
+      </ul>
     </div>
 
     <!-- //// -->
@@ -278,102 +260,3 @@ export default {
   },
 };
 </script>
-
-<!-- <style scoped>
-.page-menu {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.btn-menu {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.btn-menu:hover {
-  background-color: #45a049;
-}
-
-.listheader {
-  font-size: 1.5rem;
-}
-
-.restiteam {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  border: 1px solid black;
-  padding: 10px;
-  text-align: center;
-}
-
-.restiteam h1,
-.restiteam h2 {
-  font-size: 16px;
-  margin: 0;
-}
-
-ul.category-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.category-info {
-  border: 1px solid #ccc;
-  padding: 10px;
-}
-
-.item-info p {
-  margin: 0;
-  line-height: 2rem;
-  font-size: 22px;
-}
-.items-container {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(250px, 1fr)
-  ); /* Two columns with flexible width */
-  gap: 20px; /* Gap between items */
-}
-.showitems {
-  padding: 0.2rem;
-  border: 2px solid #4caf50;
-}
-
-.router-link {
-  display: flex;
-  justify-content: space-between;
-}
-.red {
-  color: white;
-  transition: background-color 0.3s ease;
-  background: #ff0000;
-  padding: 1.3em 1em;
-}
-.blue {
-  background: #2b547f;
-}
-.price-qty-container {
-  display: flex;
-  justify-content: space-between; /* Align items with space between */
-  align-items: center; /* Align items vertically */
-}
-
-.price,
-.quantity {
-  margin: 0; /* Remove default margin */
-}
-</style> -->

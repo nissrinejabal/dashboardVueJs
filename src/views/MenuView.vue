@@ -1,15 +1,12 @@
 <template>
-  <div>
-    test menu
-    <MenurestComp /><NavbarComp />
-  </div>
+  <div><HeaderMenuComp /> <MenurestComp /></div>
 </template>
 
 <script>
-import NavbarComp from "@/components/header/NavbarComp.vue";
 import MenurestComp from "@/components/restaurant/Menu/MenurestComp.vue";
+import HeaderMenuComp from "@/components/header/HeaderMenuComp.vue";
 export default {
-  components: { MenurestComp },
+  components: { MenurestComp, HeaderMenuComp },
 };
 </script>
 

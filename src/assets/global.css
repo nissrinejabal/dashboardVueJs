@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
   background: #524a4e;
@@ -8,6 +8,18 @@ body {
   background-repeat: no-repeat;
   background-position: unset;
   background-size: cover;
+} */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1440' height='800' preserveAspectRatio='none' viewBox='0 0 1440 800'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1029%26quot%3b)' fill='none'%3e%3crect width='1440' height='800' x='0' y='0' fill='rgba(31%2c 34%2c 34%2c 1)'%3e%3c/rect%3e%3cpath d='M-247.02 431.51C-59.94 445.69 125.83 800.93 397.75 815.51 669.67 830.09 634.41 930.78 720.14 932.57' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M-20.06 520.24C99.27 520.8 213.31 620.24 446.68 620.24 680.05 620.24 671.82 518.08 913.42 520.24 1155.02 522.4 1235.48 851.79 1380.16 870.54' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M-215.22 298.91C-31.01 310.83 139.21 629.26 429.44 658.91 719.67 688.56 644.84 931.32 751.77 952.12' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M-161.92 275.5C26.04 283.34 140.78 578.18 519.14 595.5 897.51 612.82 1009.77 929.29 1200.21 938.82' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3cpath d='M-177.45 215.96C-8.4 221.86 90.19 466.7 442.06 487.96 793.94 509.22 877.86 872.06 1061.58 889.06' stroke='rgba(51%2c121%2c194%2c0.58)' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1029'%3e%3crect width='1440' height='800' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+  background-size: cover;
+  /* background-repeat: no-repeat; */
 }
 
 h2 {
@@ -182,8 +194,8 @@ span {
   justify-content: space-between;
   margin: 10px;
 }
-/*for the tables -show pages*/
-.info-list-first {
+/* Styles for Restaurant List Page show categorie and show menu and show items */
+/* .info-list-first {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
@@ -198,14 +210,25 @@ span {
 }
 .global-info {
   flex: 1;
+} */
+.info-list-first {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
-
-/***btn**/
-.showbtn {
-  margin-left: 10px;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
+.info-list {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.global-info {
+  flex: 1;
+}
+.global-info p {
+  font-size: 21px;
 }
 .Menu-btn {
   background-color: #ffc107;
@@ -225,9 +248,15 @@ span {
   display: flex;
   justify-content: space-between;
 }
+
 .button-container {
   display: flex;
+  margin-top: 20px;
+  gap: 1rem;
   align-items: center;
+}
+.button-container button {
+  width: 10rem;
 }
 /*for the update btn*/
 .update-verif {
@@ -322,15 +351,30 @@ button.delete:hover {
   background-color: tan;
   color: rgb(14, 0, 93);
 }
-/* On screens that are 992px wide or less, the background color is blue */
+/* big picture color is blue */
 @media screen and (max-width: 992px) {
   .body {
     background-color: blue;
     color: white;
   }
+  .info-list-first {
+    max-width: 90%;
+  }
+  .info-list {
+    flex-direction: column;
+  }
+  .global-info {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    flex-direction: column;
+  }
+  .button-container {
+    justify-content: center;
+  }
 }
-
-/* On screens that are 600px wide or less, the background color is olive */
+@media screen and (max-width: 768px) {
+} /* for the small devices */
 @media screen and (max-width: 600px) {
   .body {
     background-color: olive;
@@ -345,10 +389,18 @@ button.delete:hover {
     margin: 0 auto;
     padding: 20px;
   }
-  .button-container {
-    justify-content: center;
-  }
+
   .update-verif {
     flex-direction: column;
+  }
+  .button-container {
+    gap: 20px;
+    flex-direction: column;
+  }
+}
+/****for the samllest devices*/
+@media screen and (max-width: 480px) {
+  .body {
+    background: rgb(107, 0, 128);
   }
 }

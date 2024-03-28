@@ -1,7 +1,6 @@
 <template>
   <NavbarComp />
-  <h1>page show list categorie</h1>
-  <div class="routere">
+  <div class="rule">
     <router-link
       :to="{ name: 'AddNewCatgoryComp', params: { RestId: RestId } }"
     >
@@ -13,7 +12,7 @@
     </router-link>
   </div>
   <div class="info-list-first">
-    <h1>Categories List :</h1>
+    <h1 class="header">Categories List :</h1>
     <div class="mycla">
       <p class="listheader" v-if="numOfCategories > 0">
         list of Categories ({{ numOfCategories }})
@@ -37,29 +36,28 @@
         <div class="button-container">
           <router-link
             :to="{
-              name: 'UpdateCategory',
-              params: { CatId: Cat.id, RestId: Cat.RestId },
-            }"
-          >
-            <button class="showbtn">Update</button>
-          </router-link>
-          <router-link
-            :to="{
               name: 'DeleteCategory',
               params: { CatId: Cat.id, RestId: Cat.RestId },
             }"
           >
-            <button class="delete-btn showbtn">
-              delete <br />
-              categories and related items
-            </button>
+            <button class="delete-btn">delete</button>
           </router-link>
+          <router-link
+            :to="{
+              name: 'UpdateCategory',
+              params: { CatId: Cat.id, RestId: Cat.RestId },
+            }"
+          >
+            <button>Update</button>
+          </router-link>
+
           <router-link :to="{ name: 'home', params: { RestId: Cat.RestId } }">
-            <button class="Menu-btn showbtn">home</button>
+            <button class="Menu-btn">Menu</button>
           </router-link>
         </div>
       </li>
     </ul>
+    <p>ps:categories and related items</p>
   </div>
 </template>
 
@@ -151,7 +149,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
 .routere {
   display: flex;
   justify-content: space-between;
@@ -165,4 +163,4 @@ export default {
   gap: 1rem;
   border-radius: 4rem;
 }
-</style>
+</style> -->

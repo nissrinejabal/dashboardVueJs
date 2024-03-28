@@ -3,8 +3,6 @@
   <div class="info-list-first">
     <!-- hada comp child wlidat  -->
     <h1 class="header">Restaurant List</h1>
-    <!-- <p>{{ allRestaurant }}</p> -->
-
     <div class="mycla">
       <p v-if="allRestaurant.length > 0">
         list of restaurant ({{ allRestaurant.length }})
@@ -12,7 +10,9 @@
       </p>
       <div v-else class="norestadded">no restaurant added</div>
       <div>
-        <button @click="showDeleteConfirmation">Delete All restaurant</button>
+        <button @click="showDeleteConfirmation" class="delete-btn">
+          Delete All restaurant
+        </button>
         <!-- Delete confirmation popup -->
         <div v-if="showPopup" class="popup-container">
           <div class="popup">
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-
+    <!-- <p>{{ allRestaurant }}</p> -->
     <ul>
       <li v-for="rest in allRestaurant" :key="rest.id" class="info-list">
         <div class="global-info">
@@ -42,15 +42,15 @@
           </p>
           <!-- <p><strong>rest id:</strong> {{ rest.id }}</p> -->
         </div>
+
         <div class="button-container">
-          <!-- ,prams:{RestId: rest.id} -->
           <router-link
             :to="{
               name: 'DeleteRestaurant',
               params: { RestId: rest.id },
             }"
           >
-            <button class="showbtn">delete</button>
+            <button class="delete-btn">delete</button>
           </router-link>
           <router-link
             :to="{
@@ -58,7 +58,7 @@
               params: { RestId: rest.id },
             }"
           >
-            <button class="delete-btn showbtn">Update</button>
+            <button>Update</button>
           </router-link>
           <router-link
             :to="{
@@ -66,7 +66,7 @@
               params: { RestId: rest.id },
             }"
           >
-            <button class="Menu-btn showbtn">Menu</button>
+            <button class="Menu-btn">Menu</button>
           </router-link>
         </div>
       </li>
@@ -214,4 +214,3 @@ export default {
   },
 };
 </script>
-<style scoped></style>

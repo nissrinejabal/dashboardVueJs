@@ -11,6 +11,7 @@
         <button type="button">add new restaurant</button>
       </router-link>
     </div>
+    hhh
     <ShowlistComp :allRestaurant="listOfRestaurant" />
     <!-- hadi ktasama props :allRestaurant="listOfRestaurant" aray  pros fiha all aray list -->
   </div>

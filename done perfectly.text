@@ -4,3 +4,5 @@ login + sign up + profile + addrest
  +add rest,cat, item , all
  +update rest, cat  item, all
  +delete rest, cat  item, all
+
+ show list rest+categories +show items 
