@@ -5,15 +5,15 @@
       <router-link
         :to="{ name: 'ShowListCatgoriesComp', params: { RestId: RestId } }"
       >
-        <button @click="viewAllCategories">View / add Category</button>
+        <button @click="viewAllCategories">View Categories</button>
       </router-link>
       <router-link :to="{ name: 'AddItemsComp', params: { RestId: RestId } }">
         <button v-if="numOfCategories > 0">add new item</button>
       </router-link>
-      <button @click="goback">go back</button>
+      <button @click="gobackhome">home</button>
     </div>
     <div class="info-list-first">
-      <h1 class="header">category List</h1>
+      <h1 class="header">products List</h1>
 
       <div class="mycla">
         <p v-if="ListOfUserCategories.length > 0">
@@ -28,12 +28,12 @@
         </p>
 
         <div>
-          <button @click="showDeleteConfirmation">Delete All categories</button>
+          <button @click="showDeleteConfirmation">Delete All items</button>
           <!-- Delete confirmation popup -->
           <div v-if="showPopup" class="popup-container">
             <div class="popup">
               <p>
-                Are you sure you want to delete all categoriess ?
+                Are you sure you want to delete all items/products ?
                 (rest,cat,items)
               </p>
               <br />
@@ -183,7 +183,7 @@ export default {
     ...mapActions(["redirectTo"]),
 
     viewCategory() {},
-    goback() {
+    gobackhome() {
       this.redirectTo({ val: "home" });
     },
 

@@ -8,7 +8,7 @@
         ><br />restname :
         <span>{{ restname }}</span>
       </p>
-      <button @click="gobackMenu" class="btn-menu">Menu</button>
+      <button @click="gobackhome">home</button>
     </div>
 
     <div class="authentication-form">
@@ -93,7 +93,8 @@
             >
             <div class="btn-profile">
               <button type="submit">Add item</button>
-              <button @click="gobackhome">Go back home</button>
+
+              <button @click="gobackMenu" class="btn-menu">Menu</button>
             </div>
           </form>
         </div>
@@ -206,18 +207,18 @@ export default {
       "canUserAccessThisRestaurant",
     ]),
 
-    async DisplayUserCategories(userId, restaurantId) {
+    async DisplayUserCategories(userId, RestId) {
       let result = await axios.get(
-        `http://localhost:3000/categories?userId=${userId}&RestId=${restaurantId}`
+        `http://localhost:3000/categories?userId=${userId}&RestId=${RestId}`
       );
       if (result.status == 200) {
         this.ListOfUserCategories = result.data;
         console.log(result.data);
       }
     },
-    async getRestInfo(userId, restaurantId) {
+    async getRestInfo(userId, RestId) {
       let result = await axios.get(
-        `http://localhost:3000/restaurants?userId=${userId}&id=${restaurantId}`
+        `http://localhost:3000/restaurants?userId=${userId}&id=${RestId}`
       );
       let RestDetails = [];
       if (result.status == 200) {
@@ -244,7 +245,7 @@ export default {
           Quantity: this.Quantity,
           phone: this.phone,
           userId: parseInt(this.userId, 10),
-          restaurantId: parseInt(this.RestId, 10),
+          RestId: parseInt(this.RestId, 10),
           CatId: this.pickedCategory,
 
           // userId: this.userId, //this bash kola user kaydkhl l rest dyalo mashi dyal lakhr

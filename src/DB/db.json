@@ -5,6 +5,18 @@
       "password": "123456789",
       "email": "admin@gmail.com",
       "id": "1"
+    },
+    {
+      "id": "ceaa",
+      "name": "user mine",
+      "password": "password123",
+      "email": "nissrinejabali@gmail.com"
+    },
+    {
+      "id": "b7ce",
+      "name": "user mine",
+      "password": "password123",
+      "email": "nissrinejabali@gmail.com"
     }
   ],
   "restaurants": [
@@ -32,48 +44,83 @@
   ],
   "categories": [
     {
-      "categorieName": "2",
+      "categorieName": "first 1 categorie name",
       "userId": 1,
-      "RestId": 2,
+      "RestId": 1,
       "id": "1"
     },
     {
-      "categorieName": "name of the cat 2",
+      "categorieName": " second 2 categorie ",
       "userId": 1,
       "RestId": 1,
       "id": "2"
+    },
+    {
+      "categorieName": " third 3 categorie ",
+      "userId": 1,
+      "RestId": 1,
+      "id": "3"
     }
   ],
   "items": [
     {
-      "itemname": "345",
+      "itemname": "item namfffe 1 ",
       "price": "10.99",
       "description": "Delicious burger with cheese and veggies",
       "Quantity": "5",
-      "RestId": 1,
       "userId": 1,
+      "RestId": 1,
       "CatId": 1,
-      "id": "3"
-    },
-    {
-      "itemname": "Burger",
-      "price": "10.99",
-      "description": "Delicious burger with cheese and veggies",
-      "Quantity": "5",
-      "RestId": 1,
-      "userId": 1,
-      "CatId": 2,
       "id": "1"
     },
     {
-      "itemname": "Burger",
-      "price": "10.99",
-      "description": "Delicious burger with cheese and veggies",
-      "Quantity": "5",
-      "RestId": 1,
+      "itemname": "Another Burger",
+      "price": "8.99",
+      "description": "Tasty burger with special sauce",
+      "Quantity": "10",
       "userId": 1,
-      "CatId": 2,
-      "id": "6"
+      "RestId": 1,
+      "CatId": 1,
+      "id": "4"
+    },
+    {
+      "itemname": "Veggie Wrap",
+      "price": "7.99",
+      "description": "Healthy wrap with assorted vegetables",
+      "Quantity": "8",
+      "userId": 1,
+      "RestId": 1,
+      "CatId": 3,
+      "id": "5"
+    },
+    {
+      "id": "b421",
+      "itemname": "rrrfff",
+      "price": "12332.00",
+      "description": "rrrfff",
+      "Quantity": 1,
+      "RestId": 1,
+      "CatId": "3"
+    },
+    {
+      "id": "ff81",
+      "itemname": "test",
+      "price": "1231.00",
+      "description": "testets",
+      "Quantity": 1,
+      "userId": 1,
+      "restaurantId": 1,
+      "CatId": "2"
+    },
+    {
+      "id": "5b9d",
+      "itemname": "RestIdRestIdRes",
+      "price": "111111.00",
+      "description": "RestIdRestIdR",
+      "Quantity": 1,
+      "userId": 1,
+      "RestId": 1,
+      "CatId": "1"
     }
   ]
 }

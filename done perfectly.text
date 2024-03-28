@@ -6,3 +6,61 @@ login + sign up + profile + addrest
  +delete rest, cat  item, all
 
  show list rest+categories +show items 
+
+ <button @click="goback">home</button>
+goback() {
+      this.$router.go(-1);
+    },
+    <button @click="gobackhome">home</button>
+    gobackhome() {
+      this.redirectTo({ val: "home" });
+    },
+
+
+    <router-link :to="{ name: 'Menu', params: { RestId: RestId } }">
+      <button @click="viewCategory">menu</button>
+    </router-link>
+    
+    <router-link :to="{ name: 'Menu', params: { RestId: RestId } }">
+      <button @click="gobackMenu">menu</button>
+    </router-link>
+
+    <router-link :to="{ name: 'Menu', params: { RestId: Cat.RestId } }">
+      <button class="Menu-btn">menu</button>
+    </router-link>
+
+    <router-link :to="{ name: 'home', params: { RestId: RestId } }">
+      <button @click="gobackMenu">home</button>
+    </router-link>
+
+
+     <div class="delete-verif">
+        <p>Are you sure you want to delete?</p>
+        <button @click="deleteCategory">Delete</button>
+        <button @click="goback">Go Back</button>
+        <button @click="goBacklistcat">list categories</button>
+      </div>
+          goback() {
+      this.$router.push({
+        name: "Menu",
+        params: { RestId: this.RestId },
+      });
+    },
+    goBacklistcat() {
+      this.$router.push({
+        name: "ShowListCatgoriesComp",
+        params: { RestId: this.RestId },
+      });
+    },
+
+    .input-box-update,
+.selected-items {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+}
+.selected-items {
+  width: 109%;
+}

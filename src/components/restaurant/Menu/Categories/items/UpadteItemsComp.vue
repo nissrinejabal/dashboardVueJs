@@ -14,7 +14,7 @@
       </h1>
       <form @submit.prevent="updateItem">
         <div class="inputs-box">
-          <p class="parae">Item Name:</p>
+          <p class="parae">Product Name:</p>
           <input
             type="text"
             class="input-box-update"
@@ -80,13 +80,17 @@
             >{{ errorMessage }} {{ successMessage }}</span
           >
           <p>Are you sure you want to update?</p>
-          <button type="submit">Update item</button>
+          <button type="submit">Update Product</button>
         </div>
       </form>
     </div>
     <div class="update-verif">
-      <button class="btn-menu" @click="gobackMenu">Menu</button>
-      <button @click="goback">home</button>
+      <router-link :to="{ name: 'Menu', params: { RestId: RestId } }">
+        <button @click="gobackMenu">menu</button>
+      </router-link>
+      <router-link :to="{ name: 'home', params: { RestId: RestId } }">
+        <button @click="gobackMenu">home</button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -205,21 +209,19 @@ export default {
       "canUserAccessThisRestaurant",
       "canUserAccessThisItem",
     ]),
-    goback() {
-      this.$router.go(-1);
-    },
-    async DisplayUserCategories(userId, restaurantId) {
+
+    async DisplayUserCategories(userId, RestId) {
       let result = await axios.get(
-        `http://localhost:3000/categories?userId=${userId}&RestId=${restaurantId}`
+        `http://localhost:3000/categories?userId=${userId}&RestId=${RestId}`
       );
       if (result.status == 200) {
         this.ListOfUserCategories = result.data;
         console.log(result.data);
       }
     },
-    async getRestInfo(userId, restaurantId) {
+    async getRestInfo(userId, RestId) {
       let result = await axios.get(
-        `http://localhost:3000/restaurants?userId=${userId}&id=${restaurantId}`
+        `http://localhost:3000/restaurants?userId=${userId}&id=${RestId}`
       );
       let RestDetails = [];
       if (result.status == 200) {
@@ -259,7 +261,7 @@ export default {
             Quantity: this.Quantity,
             phone: this.phone,
             userId: parseInt(this.userId, 10),
-            restaurantId: parseInt(this.RestId, 10),
+            RestId: parseInt(this.RestId, 10),
             CatId: this.pickedCategory,
 
             // userId: this.userId, //this bash kola user kaydkhl l rest dyalo mashi dyal lakhr
@@ -290,18 +292,18 @@ export default {
       }
     },
   },
-  gobackMenu() {
-    this.$router.push({ name: "Menu", params: { RestId: this.RestId } });
-  },
-  goback() {
-    this.$router.go(-1);
-  },
 };
 </script>
 
 <style scoped>
-/* 
-textarea {
-  resize: vertical;
-} */
+.selected-items {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+}
+.selected-items {
+  width: 109%;
+}
 </style>

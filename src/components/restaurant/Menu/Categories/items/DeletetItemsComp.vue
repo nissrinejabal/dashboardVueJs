@@ -3,18 +3,23 @@
     <NavbarComp />
     <div class="update-delete-form">
       <div class="update-delete-form">
-        <h1>Delete Items {{ itemname }} id# {{ itemsId }} <br /></h1>
+        <h1>
+          Delete Product <span>{{ restname }} </span> id #<span
+            >{{ address }}
+          </span>
+          <br />
+        </h1>
         <div class="Delete-inputs-form">
           <input
             class="input-box-update"
             type="text"
-            v-model.trim="restname"
+            v-model.trim="itemname"
             disabled
           />
           <input
             class="input-box-update"
             type="text"
-            v-model.trim="address"
+            v-model.trim="itemsId"
             disabled
           />
           <div class="error-feedback" v-if="successMessage.length > 0">
@@ -28,7 +33,8 @@
       <div class="delete-verif">
         <p>Are you sure you want to delete?</p>
         <button @click="deleteCategory">Delete</button>
-        <button @click="goBack">Go Back</button>
+        <button @click="gobackHome">menu</button>
+        <button @click="gobackHomelistcat">list categories</button>
       </div>
     </div>
   </div>
@@ -90,8 +96,13 @@ export default {
   methods: {
     ...mapActions(["redirectTo"]),
     ...mapMutations(["canUserAccessThisCategory", "canUserAccessThisItem"]),
-
-    goBack() {
+    gobackHome() {
+      this.$router.push({
+        name: "Menu",
+        params: { RestId: this.RestId },
+      });
+    },
+    gobackHomelistcat() {
       this.$router.push({
         name: "ShowListCatgoriesComp",
         params: { RestId: this.RestId },

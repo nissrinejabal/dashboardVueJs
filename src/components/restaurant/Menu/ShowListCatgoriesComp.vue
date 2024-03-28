@@ -7,8 +7,8 @@
       <button @click="viewAllCategories">add Category</button>
     </router-link>
 
-    <router-link :to="{ name: 'Menu', params: { RestId: RestId } }">
-      <button @click="viewCategory">go back menu(rja3 bmo)</button>
+    <router-link :to="{ name: 'home', params: { RestId: RestId } }">
+      <button @click="gobackMenu">home</button>
     </router-link>
   </div>
   <div class="info-list-first">
@@ -51,8 +51,8 @@
             <button>Update</button>
           </router-link>
 
-          <router-link :to="{ name: 'home', params: { RestId: Cat.RestId } }">
-            <button class="Menu-btn">Menu</button>
+          <router-link :to="{ name: 'Menu', params: { RestId: Cat.RestId } }">
+            <button class="Menu-btn">menu</button>
           </router-link>
         </div>
       </li>
@@ -111,9 +111,7 @@ export default {
   methods: {
     ...mapActions(["redirectTo"]),
     ...mapMutations(["canUserAccessThisRestaurant", "displayAllCategories"]),
-    goback() {
-      this.$router.go(-1);
-    },
+
     showDeleteConfirmation() {
       this.showPopup = true;
     },
@@ -148,19 +146,3 @@ export default {
   },
 };
 </script>
-
-<!-- <style scoped>
-.routere {
-  display: flex;
-  justify-content: space-between;
-}
-.popup {
-  background: #b90000;
-  display: flex;
-  padding: 1rem;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  border-radius: 4rem;
-}
-</style> -->
