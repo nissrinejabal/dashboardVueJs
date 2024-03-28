@@ -1,58 +1,52 @@
 <template>
-  <!-- v-model.trim="state.email"
-  v-model.trim="state.password" -->
-  <div>
-    <div class="authentication-form">
-      <div class="card">
-        <div class="card2">
-          <h1>Login</h1>
-          <form @click.prevent>
-            <p class="parae">Email</p>
-            <p>
-              <input
-                type="email"
-                class="response-box"
-                placeholder="Email"
-                v-model.trim="state.email"
-              />
-              <br />
-              <span class="error-feedback" v-if="v$.email.$error">
-                {{ v$.email.$errors[0].$message }}
-              </span>
-            </p>
-            <p class="parap">password</p>
-            <p>
-              <input
-                type="password"
-                class="response-box"
-                placeholder="password"
-                v-model.trim="state.password"
-              />
-              <br />
-              <br />
-              <span class="error-feedback" v-if="v$.password.$error">
-                {{ v$.password.$errors[0].$message }}
-              </span>
-              <br />
-              <span class="error-feedback">{{ userNotfoundErr }}</span>
-            </p>
-            <p>
-              <span>
-                <input type="checkbox" id="_checkbox" /> I agree to the
-              </span>
-              <a href="#" class="terms">terms</a>
-            </p>
-            <a href="#"> <button @click="login()">login</button></a>
+  <div class="authentication-form">
+    <div class="card">
+      <div class="card2">
+        <h1>Login</h1>
+        <form @click.prevent>
+          <p class="parae">Email</p>
+          <p>
+            <input
+              type="email"
+              class="response-box"
+              placeholder="Email"
+              v-model.trim="state.email"
+            />
+            <br />
+            <span class="error-feedback" v-if="v$.email.$error">
+              {{ v$.email.$errors[0].$message }}
+            </span>
+          </p>
+          <p class="parap">Password</p>
+          <p>
+            <input
+              type="password"
+              class="response-box"
+              placeholder="Password"
+              v-model.trim="state.password"
+            />
+            <br />
+            <span class="error-feedback" v-if="v$.password.$error">
+              {{ v$.password.$errors[0].$message }}
+            </span>
+            <br />
+            <span class="error-feedback">{{ userNotfoundErr }}</span>
+          </p>
+          <p>
+            <input type="checkbox" /> I agree to the
+            <a href="#" class="terms">terms</a>
+          </p>
 
-            <p class="or">OR</p>
-            <a href="#">
-              <button @click="redirectTo({ val: 'Signup' })">
-                create your account
-              </button>
-            </a>
-            <p>Have an account?<a href="#" class="terms"> Sign in</a></p>
-          </form>
-        </div>
+          <a href="#"> <button @click="login()">login</button></a>
+
+          <p class="or">OR</p>
+          <a href="#">
+            <button @click="redirectTo({ val: 'Signup' })">
+              create your account
+            </button>
+          </a>
+          <p>Don't have an account?<a href="#" class="terms"> Sign in</a></p>
+        </form>
       </div>
     </div>
   </div>
@@ -104,20 +98,23 @@ export default {
     async login() {
       this.v$.$validate();
       if (!this.v$.$error) {
-        console.log("dazet lvalidation form ");
-        let result = await axios.get(
-          `http://localhost:3000/users?email=${this.state.email}&password=${this.state.password}`
+        const result = await axios.get(
+          `http://localhost:3000/users?email=${this.state.email}`
         );
-        if (result.status == 200 && result.data.length > 0) {
-          localStorage.setItem("user-info", JSON.stringify(result.data[0]));
-          console.log("logged in");
-          this.redirectTo({ val: "home" });
+        if (result.status === 200 && result.data.length > 0) {
+          const user = result.data[0];
+          if (user.password === this.state.password) {
+            // Password is correct, login successful
+            localStorage.setItem("user-info", JSON.stringify(user));
+            this.redirectTo({ val: "home" });
+          } else {
+            // Password is incorrect
+            this.userNotfoundErr = "Incorrect password.";
+          }
         } else {
-          console.log("no user found");
-          this.userNotfoundErr = "user not found";
+          // User does not exist
+          this.userNotfoundErr = "User not found.";
         }
-      } else {
-        console.log("madazetsh lvalidation form");
       }
     },
   },
@@ -126,6 +123,9 @@ export default {
 
 <style scoped>
 .card2 {
-  margin: 15% auto 0;
+  margin: 10% auto 0;
+}
+.card {
+  height: 430px;
 }
 </style>

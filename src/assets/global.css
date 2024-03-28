@@ -72,8 +72,8 @@ button {
 }
 
 button:hover {
-  background-color: #2ee59d;
-  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  background-color: #007bff;
+  box-shadow: 0px 15px 20px rgb(42 112 190);
   color: #fff;
   transform: translateY(-7px);
 }
@@ -92,7 +92,7 @@ span {
 /*error section*/
 .error-feedback {
   padding-top: 12px;
-  color: red;
+  color: #e24a4ae6;
 }
 .success-feedback {
   padding-top: 12px;
@@ -131,8 +131,8 @@ textarea {
   border: 1px solid #a1b57d;
 }
 .terms {
-  text-decoration: #00ff75;
-  color: #00ff75;
+  color: #9ef096;
+  text-decoration: underline;
 }
 
 .authentication-form {
@@ -243,9 +243,10 @@ textarea {
   color: #fff;
   border: none;
 }
-.norestadded {
+.norestadded p {
+  border-radius: 33px;
+  padding: 16px;
   background: red;
-  padding: 1rem 1rem;
 }
 .mycla {
   display: flex;
@@ -351,6 +352,7 @@ button.delete:hover {
   cursor: pointer;
 }
 .body {
+  display: none;
   background-color: tan;
   color: rgb(14, 0, 93);
 }

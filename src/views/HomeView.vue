@@ -3,7 +3,7 @@
     <!-- hada comp parent -->
     <NavbarComp />
     <div class="rule">
-      <p class="text">Welcome home {{ role }}</p>
+      <p class="text">Welcome {{ name }}</p>
       <router-link :to="{ name: 'Profile' }">
         <button type="button">Profile</button>
       </router-link>
@@ -11,7 +11,7 @@
         <button type="button">add new restaurant</button>
       </router-link>
     </div>
-    hhh
+
     <ShowlistComp :allRestaurant="listOfRestaurant" />
     <!-- hadi ktasama props :allRestaurant="listOfRestaurant" aray  pros fiha all aray list -->
   </div>

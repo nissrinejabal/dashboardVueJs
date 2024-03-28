@@ -20,7 +20,7 @@
           list of categories ({{ ListOfUserCategories.length }})
           <!-- hadi for all the resturant i have -->
         </p>
-        <div v-else class="norestadded">no categories added</div>
+        <div v-else class="norestadded"><p>no categories added</p></div>
 
         <p>
           restaurant :<span>{{ restname }}</span> <br />
@@ -28,7 +28,12 @@
         </p>
 
         <div>
-          <button @click="showDeleteConfirmation">Delete All items</button>
+          <button
+            v-if="ListOfUserCategories.length > 0"
+            @click="showDeleteConfirmation"
+          >
+            Delete All items
+          </button>
           <!-- Delete confirmation popup -->
           <div v-if="showPopup" class="popup-container">
             <div class="popup">

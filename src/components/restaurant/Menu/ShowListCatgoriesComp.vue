@@ -57,7 +57,7 @@
         </div>
       </li>
     </ul>
-    <p>ps:categories and related items</p>
+    <p>ps: delete categories and related items</p>
   </div>
 </template>
 

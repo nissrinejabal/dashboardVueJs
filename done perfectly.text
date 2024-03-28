@@ -6,6 +6,13 @@ login + sign up + profile + addrest
  +delete rest, cat  item, all
 
  show list rest+categories +show items 
+functioning 
++login sign up
+
+
+
+
+
 
  <button @click="goback">home</button>
 goback() {

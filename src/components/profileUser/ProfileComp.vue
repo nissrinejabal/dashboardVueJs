@@ -149,7 +149,7 @@ export default {
           this.successMessage = "";
         }
       } else {
-        console.log("madazetsh lvalidation form");
+        console.log("Form validation failed.");
         this.errorMessage = "try again";
         this.successMessage = "";
       }

@@ -8,7 +8,7 @@
             <p class="parae">Nom</p>
             <p>
               <input
-                type="nom"
+                type="text"
                 class="response-box"
                 placeholder="Name"
                 v-model.trim="name"
@@ -31,9 +31,7 @@
               <span class="error-feedback" v-if="v$.email.$error">
                 {{ v$.email.$errors[0].$message }}
               </span>
-              <span class="error-feedback"
-                >{{ errorMessage }} {{ successMessage }}</span
-              >
+              <span class="error-feedback">{{ errorMessage }}</span>
             </p>
             <p class="parap">Password</p>
             <p>
@@ -53,6 +51,9 @@
             <button type="submit" @click="validatbeforesignup()">
               Sign Up
             </button>
+            <br />
+            <br />
+            <span class="loading-message" v-if="loading">Loading...</span>
 
             <p class="or">OR</p>
             <button @click="redirectToLogin">Log in with your account</button>
@@ -78,9 +79,8 @@ export default {
       name: "",
       email: "",
       password: "",
-      userEmailExists: "",
       errorMessage: "",
-      successMessage: "",
+      loading: false,
     };
   },
   validations() {
@@ -90,47 +90,31 @@ export default {
       email: { required, email },
     };
   },
-  mounted() {
-    this.fetchUserData();
-  },
   methods: {
     ...mapActions(["redirectTo"]),
-    async fetchUserData() {
-      try {
-        const response = await axios.get("http://localhost:3000/users/1");
-        const userData = response.data;
-        this.name = userData.name;
-        this.email = userData.email;
-        // Assuming you don't want to fetch password from the server for security reasons
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    },
-    redirectToLogin() {
-      this.redirectTo({ val: "Login" });
-    },
     async validatbeforesignup() {
-      let res = await axios.get(
-        `http://localhost:3000/users?email=${this.email}`
-      );
-      if ((res.status = 200)) {
-        this.userEmailExists = res.data;
-        if (this.userEmailExists.length != 1) {
-          (this.errorMessage = ""), (this.successMessage = "loading...");
+      this.loading = true;
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/users?email=${this.email}`
+        );
+        if (response.data.length === 0) {
           this.signUp();
         } else {
-          this.errorMessage = "must fill all fields";
-          this.successMessage = "";
+          this.errorMessage = "User already exists.";
+          this.loading = false;
         }
+      } catch (error) {
+        console.error("Error checking user existence:", error);
+        this.errorMessage = "An error occurred while checking user existence.";
+        this.loading = false;
       }
-
-      this.errorMessage = "user already exists";
-      this.successMessage = "";
     },
     async signUp() {
       this.v$.$validate();
       if (!this.v$.$error) {
         try {
+          this.loading = true; // Set loading to true when signing up
           const response = await axios.post("http://localhost:3000/users", {
             name: this.name,
             password: this.password,
@@ -139,23 +123,32 @@ export default {
           if (response.status === 201) {
             console.log("User successfully registered:", response.data);
             localStorage.setItem("user-info", JSON.stringify(response.data));
-            this.redirectTo({ val: "home" });
+            setTimeout(() => {
+              this.loading = false; // Set loading to false after a delay
+              this.redirectTo({ val: "home" });
+            }, 2000); // Adjust the timeout value as needed (in milliseconds)
           } else {
             console.error("Error registering user:", response.data);
+            this.errorMessage = "An error occurred while registering user.";
           }
         } catch (error) {
           console.error("Error registering user:", error.message);
+          this.errorMessage = "An error occurred while registering user.";
         }
       } else {
         console.log("Form validation failed.");
       }
+    },
+
+    redirectToLogin() {
+      this.redirectTo({ val: "Login" });
     },
   },
 };
 </script>
 
 <style scoped>
-.card2 {
-  margin: 5% auto 0;
+.loading-message {
+  color: gray;
 }
 </style>

@@ -111,34 +111,42 @@ export default {
   components: { NavbarComp },
   mounted() {
     let user = localStorage.getItem("user-info");
+    console.log("User data from local storage:", user);
     if (!user) {
+      console.log("User not found. Redirecting to Signup.");
       this.redirectTo({ val: "Signup" });
-      console.log("User not found");
     } else {
       const userData = JSON.parse(user);
-      this.userId = userData.id; // Parse userId as an integer
-      //ila kayyn user jiblia user id
+      console.log("User ID from user data:", userData.id);
+      this.userId = userData.id; // Parse userId as an integer //ila kayyn user jiblia user id
     }
   },
+
   methods: {
     ...mapActions(["redirectTo"]),
     async addrest() {
+      // Validate the form
       this.v$.$validate();
+
       if (!this.v$.$error) {
+        // If form validation succeeds
         let result = await axios.post(`http://localhost:3000/restaurants`, {
           restname: this.state.restname,
           phone: this.state.phone,
           address: this.state.address,
-          userId: parseInt(this.userId, 10),
-          // userId: this.userId, //this bash kola user kaydkhl l rest dyalo mashi dyal lakhr
+          userId: parseInt(this.userId, 10), // Ensure userId is correctly assigned
         });
-        console.log("form validation daz");
+
+        // Handle the result
         if (result.status == 201) {
+          // If the restaurant is successfully added
           this.errorMessage = "";
-          this.successMessage = "restaurant added successfully.";
+          this.successMessage = "Restaurant added successfully.";
 
           setTimeout(() => {
+            // Redirect to home after 2 seconds
             this.redirectTo({ val: "home" });
+            // Reset form fields and messages
             this.errorMessage = "";
             this.successMessage = "";
             this.state.restname = "";
@@ -149,12 +157,14 @@ export default {
             this.v$.address.$errors[0] = "";
           }, 2000);
         } else {
+          // If there's an error adding the restaurant
           this.errorMessage = "Failed to add restaurant.";
           this.successMessage = "";
         }
       } else {
-        console.log("ma²daztsh from validation ");
-        this.errorMessage = "try again, refresh  3mr ga3 fields";
+        // If form validation fails
+        console.log("Form validation failed.");
+        this.errorMessage = "Try again, refresh all fields.";
         this.successMessage = "";
       }
     },

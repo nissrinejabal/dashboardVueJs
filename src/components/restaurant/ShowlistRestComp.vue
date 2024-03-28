@@ -8,11 +8,16 @@
         list of restaurant ({{ allRestaurant.length }})
         <!-- hadi for all the resturant i have -->
       </p>
-      <div v-else class="norestadded">no restaurant added</div>
+      <div v-else class="norestadded"><p>no categories added</p></div>
       <div>
-        <button @click="showDeleteConfirmation" class="delete-btn">
+        <button
+          v-if="allRestaurant.length > 0"
+          @click="showDeleteConfirmation"
+          class="delete-btn"
+        >
           Delete All restaurant
         </button>
+
         <!-- Delete confirmation popup -->
         <div v-if="showPopup" class="popup-container">
           <div class="popup">
