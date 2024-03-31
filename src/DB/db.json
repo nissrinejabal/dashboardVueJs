@@ -1,16 +1,28 @@
 {
   "users": [
     {
+      "id": "1",
       "name": "admin",
       "password": "123456789",
-      "email": "admin@gmail.com",
-      "id": "1"
+      "email": "admin@gmail.com"
     },
     {
       "name": "nissrine",
-      "password": "password123",
+      "password": "123",
       "email": "nissrinejabali@gmail.com",
       "id": "2"
+    },
+    {
+      "id": "3",
+      "name": "rim",
+      "password": "123",
+      "email": "rim@gmail.com"
+    },
+    {
+      "name": "hamza",
+      "password": "1234",
+      "email": "hamzawadiee@gmail.com",
+      "id": "4"
     }
   ],
   "restaurants": [
@@ -22,11 +34,11 @@
       "userId": 1
     },
     {
-      "restname": "mohammedia",
-      "phone": "123243534",
-      "address": "louzia",
-      "userId": 2,
-      "id": "36f0"
+      "id": "2",
+      "restname": "Rest du parc",
+      "phone": 123456789,
+      "address": "casa casa",
+      "userId": "3"
     }
   ],
   "categories": [
@@ -47,6 +59,18 @@
       "userId": 1,
       "RestId": 1,
       "id": "3"
+    },
+    {
+      "id": "4",
+      "categorieName": "pizza steave",
+      "userId": 3,
+      "RestId": 2
+    },
+    {
+      "id": "5",
+      "categorieName": "second pizza",
+      "userId": 3,
+      "RestId": 2
     }
   ],
   "items": [
@@ -81,33 +105,24 @@
       "id": "5"
     },
     {
-      "id": "b421",
-      "itemname": "rrrfff",
-      "price": "12332.00",
-      "description": "rrrfff",
+      "itemname": "fromaj ",
+      "price": "11234.00",
+      "description": "formajjjjjjjj",
       "Quantity": 1,
-      "RestId": 1,
-      "CatId": "3"
+      "userId": "3",
+      "RestId": "2",
+      "CatId": 4,
+      "id": "6"
     },
     {
-      "id": "ff81",
-      "itemname": "test",
-      "price": "1231.00",
-      "description": "testets",
+      "id": "7",
+      "itemname": "pizza khadra",
+      "price": "123456.00",
+      "description": "pizza nadia",
       "Quantity": 1,
-      "userId": 1,
-      "restaurantId": 1,
-      "CatId": "2"
-    },
-    {
-      "id": "5b9d",
-      "itemname": "RestIdRestIdRes",
-      "price": "111111.00",
-      "description": "RestIdRestIdR",
-      "Quantity": 1,
-      "userId": 1,
-      "RestId": 1,
-      "CatId": "1"
+      "userId": 3,
+      "RestId": 2,
+      "CatId": 5
     }
   ]
 }

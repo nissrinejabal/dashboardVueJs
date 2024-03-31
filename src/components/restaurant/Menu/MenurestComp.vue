@@ -2,31 +2,33 @@
   <div>
     <NavbarComp />
     <div class="rule">
+      <button @click="gobackhome">home</button>
+
+      <router-link :to="{ name: 'AddItemsComp', params: { RestId: RestId } }">
+        <button v-if="numOfCategories > 0">add new item</button>
+      </router-link>
       <router-link
         :to="{ name: 'ShowListCatgoriesComp', params: { RestId: RestId } }"
       >
         <button @click="viewAllCategories">View Categories</button>
       </router-link>
-      <router-link :to="{ name: 'AddItemsComp', params: { RestId: RestId } }">
-        <button v-if="numOfCategories > 0">add new item</button>
-      </router-link>
-      <button @click="gobackhome">home</button>
     </div>
     <div class="info-list-first">
       <h1 class="header">products List</h1>
 
       <div class="mycla">
-        <p v-if="ListOfUserCategories.length > 0">
-          list of categories ({{ ListOfUserCategories.length }})
-          <!-- hadi for all the resturant i have -->
-        </p>
-        <div v-else class="norestadded"><p>no categories added</p></div>
+        <div v-if="ListOfUserCategories.length > 0">
+          <p>
+            list of categories ({{ ListOfUserCategories.length }})
+            <!-- hadi for all the resturant i have -->
+          </p>
+        </div>
 
-        <p>
+        <div v-else class="norestadded"><p>No Products added</p></div>
+        <p v-if="ListOfUserCategories.length > 0">
           restaurant :<span>{{ restname }}</span> <br />
           adress : <span>{{ address }}</span>
         </p>
-
         <div>
           <button
             v-if="ListOfUserCategories.length > 0"

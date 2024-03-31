@@ -161,8 +161,8 @@ export default {
             `http://localhost:3000/categories/${this.CatId}`,
             {
               categorieName: this.categorieName,
-              userId: parseInt(this.userId, 10),
-              RestId: parseInt(this.RestId, 10),
+              userId: this.userId,
+              RestId: this.RestId,
             }
           );
           if (result.status == 200) {

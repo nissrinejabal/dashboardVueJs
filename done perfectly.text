@@ -71,3 +71,24 @@ goback() {
 .selected-items {
   width: 109%;
 }
+
+
+
+  userId: parseInt(this.userId, 10), // Ensure userId is correctly assigned
+
+
+
+
+
+
+ila bghiti tfhmi kter go to add new categorycomp
+// Fetch all existing categories
+        const existingCategories = await axios.get(`http://localhost:3000/categories`);
+        
+// Generate a unique ID for the new category
+        const newId = existingCategories.data.length > 0
+          ? parseInt(existingCategories.data[existingCategories.data.length - 1].id) + 1
+          : 1;
+
+ // Add the new category with the generated ID 
+         hadi b9ay tzidiha 9ble hadi  let result = await axios.post(`http://localhost:3000/categories`, {

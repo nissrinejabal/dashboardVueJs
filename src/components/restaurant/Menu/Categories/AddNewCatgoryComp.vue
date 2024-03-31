@@ -30,6 +30,9 @@
               <span class="error-feedback" v-if="v$.categorieName.$error">
                 {{ v$.categorieName.$errors[0].$message }}
               </span>
+              <span class="error-feedback"
+                >{{ errorMessage }} {{ successMessage }}</span
+              >
             </p>
           </form>
           <div class="btn-profile">
@@ -76,7 +79,9 @@ export default {
   },
   async mounted() {
     let user = localStorage.getItem("user-info");
+    console.log("User data from local storage:", user);
     if (!user) {
+      console.log("User not found. Redirecting to Signup.");
       this.redirectTo({ val: "Signup" });
     } else {
       const userData = JSON.parse(user);
@@ -95,6 +100,7 @@ export default {
       });
       this.getRestInfo(this.userId, this.RestId);
       this.DisplayUserCategories(this.userId, this.RestId);
+      console.log("User ID from user data:", userData.id);
     }
   },
   methods: {
@@ -129,34 +135,58 @@ export default {
     },
     async addCategory() {
       this.v$.$validate();
-      // bghut ndur filterdyal ri les names
+      // Filter the user categories to check if the category name already exists
       let filterCategoryName = this.ListOfUserCategories.filter(
-        (v) => v.categorieName.toLowerCase() == this.categorieName.toLowerCase()
-        // db hna kaydir filter maj li 3andna li howa maktoub li yallah ktebt howa hadi  this.categorieName.toLocaleLowerCase()
+        (v) =>
+          v.categorieName.toLowerCase() === this.categorieName.toLowerCase()
       );
+
       console.table(filterCategoryName);
+
       if (!this.v$.$error) {
         if (filterCategoryName.length > 0) {
           this.errorMessage = "The category name already exists.";
           this.successMessage = "";
         } else {
-          let result = await axios.post(`http://localhost:3000/categories`, {
-            categorieName: this.categorieName,
-            userId: parseInt(this.userId, 10),
-            RestId: parseInt(this.RestId, 10),
-          });
-          if (result.status == 201) {
-            this.errorMessage = "";
-            this.successMessage = "Category added successfully.";
+          try {
+            // Fetch all existing categories
+            const existingCategories = await axios.get(
+              `http://localhost:3000/categories`
+            );
 
-            setTimeout(() => {
-              this.$router.push({
-                name: "ShowListCatgoriesComp",
-                params: { RestId: this.RestId },
-              });
-            }, 2000);
-            // ila kant page west page fiha hadi :RestId ndiro liha
-          } else {
+            // Generate a unique ID for the new category
+            const newId =
+              existingCategories.data.length > 0
+                ? parseInt(
+                    existingCategories.data[existingCategories.data.length - 1]
+                      .id
+                  ) + 1
+                : 1;
+
+            // Add the new category with the generated ID
+            let result = await axios.post(`http://localhost:3000/categories`, {
+              id: newId.toString(),
+              categorieName: this.categorieName,
+              userId: parseInt(this.userId, 10),
+              RestId: parseInt(this.RestId),
+            });
+
+            if (result.status == 201) {
+              this.errorMessage = "";
+              this.successMessage = "Category added successfully.";
+
+              setTimeout(() => {
+                this.$router.push({
+                  name: "ShowListCatgoriesComp",
+                  params: { RestId: this.RestId },
+                });
+              }, 2000);
+            } else {
+              this.errorMessage = "Failed to add category.";
+              this.successMessage = "";
+            }
+          } catch (error) {
+            console.error("Error adding category:", error);
             this.errorMessage = "Failed to add category.";
             this.successMessage = "";
           }
@@ -166,6 +196,7 @@ export default {
         this.successMessage = "";
       }
     },
+
     gobackMenu() {
       this.$router.push({ name: "Menu", params: { RestId: this.RestId } });
     },

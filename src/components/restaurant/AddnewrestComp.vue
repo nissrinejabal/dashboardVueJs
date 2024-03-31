@@ -130,34 +130,68 @@ export default {
 
       if (!this.v$.$error) {
         // If form validation succeeds
-        let result = await axios.post(`http://localhost:3000/restaurants`, {
-          restname: this.state.restname,
-          phone: this.state.phone,
-          address: this.state.address,
-          userId: parseInt(this.userId, 10), // Ensure userId is correctly assigned
-        });
+        try {
+          // Check if the restaurant already exists
+          const existingRestaurants = await axios.get(
+            `http://localhost:3000/restaurants`
+          );
+          const existingRestaurant = existingRestaurants.data.find(
+            (rest) => rest.restname === this.state.restname
+          );
 
-        // Handle the result
-        if (result.status == 201) {
-          // If the restaurant is successfully added
-          this.errorMessage = "";
-          this.successMessage = "Restaurant added successfully.";
+          if (!existingRestaurant) {
+            // If the restaurant doesn't exist, generate a unique ID
+            const newId =
+              existingRestaurants.data.length > 0
+                ? parseInt(
+                    existingRestaurants.data[
+                      existingRestaurants.data.length - 1
+                    ].id
+                  ) + 1
+                : 1;
 
-          setTimeout(() => {
-            // Redirect to home after 2 seconds
-            this.redirectTo({ val: "home" });
-            // Reset form fields and messages
-            this.errorMessage = "";
+            // Add the new restaurant with the generated ID
+            const result = await axios.post(
+              `http://localhost:3000/restaurants`,
+              {
+                id: newId.toString(),
+                restname: this.state.restname,
+                phone: this.state.phone,
+                address: this.state.address,
+                userId: this.userId,
+              }
+            );
+
+            if (result.status === 201) {
+              // If the restaurant is successfully added
+              this.errorMessage = "";
+              this.successMessage = "Restaurant added successfully.";
+
+              setTimeout(() => {
+                // Redirect to home after 2 seconds
+                this.redirectTo({ val: "home" });
+                // Reset form fields and messages
+                this.errorMessage = "";
+                this.successMessage = "";
+                this.state.restname = "";
+                this.state.phone = "";
+                this.state.address = "";
+                this.v$.restname.$errors[0] = "";
+                this.v$.phone.$errors[0] = "";
+                this.v$.address.$errors[0] = "";
+              }, 2000);
+            } else {
+              // If there's an error adding the restaurant
+              this.errorMessage = "Failed to add restaurant.";
+              this.successMessage = "";
+            }
+          } else {
+            // If the restaurant already exists
+            this.errorMessage = "Restaurant already exists.";
             this.successMessage = "";
-            this.state.restname = "";
-            this.state.phone = "";
-            this.state.address = "";
-            this.v$.restname.$errors[0] = "";
-            this.v$.phone.$errors[0] = "";
-            this.v$.address.$errors[0] = "";
-          }, 2000);
-        } else {
-          // If there's an error adding the restaurant
+          }
+        } catch (error) {
+          console.error("Error adding restaurant:", error);
           this.errorMessage = "Failed to add restaurant.";
           this.successMessage = "";
         }

@@ -244,6 +244,7 @@ textarea {
   border: none;
 }
 .norestadded p {
+  text-transform: uppercase;
   border-radius: 33px;
   padding: 16px;
   background: red;

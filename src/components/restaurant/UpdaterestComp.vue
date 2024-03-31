@@ -139,19 +139,19 @@ export default {
             phone: this.state.phone,
             address: this.state.address,
             // userId: this.userId,
-            userId: parseInt(this.userId, 10),
+            userId: this.userId,
           }
         );
         if (result.status == 200) {
           this.errorMessage = "";
-          this.successMessage = "updated restaurant ";
+          this.successMessage = "Restaurant successfully updated ";
           setTimeout(() => {
             this.redirectTo({ val: "home" });
           }, 2000);
         } else {
           this.successMessage = "";
-          this.errorMessage = "not updated wit wit";
-          console.log("smtgh went wrong ");
+          this.errorMessage = "An error occurred while updating the restaurant";
+          console.log("Please try again later");
         }
       }
     },

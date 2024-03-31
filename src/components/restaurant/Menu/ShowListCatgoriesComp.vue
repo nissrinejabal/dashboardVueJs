@@ -1,30 +1,30 @@
 <template>
   <NavbarComp />
   <div class="rule">
+    <router-link :to="{ name: 'home', params: { RestId: RestId } }">
+      <button @click="gobackMenu">home</button>
+    </router-link>
     <router-link
       :to="{ name: 'AddNewCatgoryComp', params: { RestId: RestId } }"
     >
       <button @click="viewAllCategories">add Category</button>
     </router-link>
-
-    <router-link :to="{ name: 'home', params: { RestId: RestId } }">
-      <button @click="gobackMenu">home</button>
-    </router-link>
   </div>
   <div class="info-list-first">
-    <h1 class="header">Categories List :</h1>
+    <h1 class="header">Categories List</h1>
     <div class="mycla">
-      <p class="listheader" v-if="numOfCategories > 0">
-        list of Categories ({{ numOfCategories }})
-      </p>
-      <div v-else>no Category added</div>
+      <div v-if="numOfCategories > 0">
+        <p>list of Categories ({{ numOfCategories }})</p>
+      </div>
+      <div v-else class="norestadded"><p>no categories added</p></div>
       <router-link
+        v-if="numOfCategories > 0"
         :to="{
           name: 'DeleteCategoryALL',
           params: { RestId: RestId },
         }"
       >
-        <button class="delete-btn">Delet all</button>
+        <button class="delete-btn">Delete all</button>
       </router-link>
     </div>
 
@@ -57,7 +57,7 @@
         </div>
       </li>
     </ul>
-    <p>ps: delete categories and related items</p>
+    <p v-if="numOfCategories > 0">ps: delete categories and related items</p>
   </div>
 </template>
 

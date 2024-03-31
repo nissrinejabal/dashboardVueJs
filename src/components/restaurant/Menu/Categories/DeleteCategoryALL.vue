@@ -101,6 +101,7 @@ export default {
     },
 
     async deleteallcategory() {
+      //kat3yt l ga3 les categories
       let allCatsResult = [];
       for (var x = 0; x < this.AllICatgoriesIdIs.length; x++) {
         let catResult = await axios.delete(
@@ -113,6 +114,7 @@ export default {
         }
         console.table(allCatsResult);
       }
+      //kat3yt l ga3 les items
       let allItemsResult = [];
       for (var z = 0; z < this.AllItemsIdIs.length; z++) {
         let itemResult = await axios.delete(

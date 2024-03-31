@@ -260,8 +260,8 @@ export default {
             description: this.description,
             Quantity: this.Quantity,
             phone: this.phone,
-            userId: parseInt(this.userId, 10),
-            RestId: parseInt(this.RestId, 10),
+            userId: this.userId,
+            RestId: this.RestId,
             CatId: this.pickedCategory,
 
             // userId: this.userId, //this bash kola user kaydkhl l rest dyalo mashi dyal lakhr

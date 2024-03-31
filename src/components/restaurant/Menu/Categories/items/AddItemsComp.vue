@@ -24,6 +24,7 @@
                 v-model="itemname"
                 placeholder="itemname"
               />
+              <br />
               <span class="error-feedback" v-if="v$?.itemname?.$error">
                 {{ v$?.itemname?.$errors[0]?.$message }}
               </span>
@@ -36,6 +37,7 @@
                 v-model="description"
                 placeholder="description"
               ></textarea>
+              <br />
               <span class="error-feedback" v-if="v$?.description?.$error">
                 {{ v$?.description?.$errors[0]?.$message }}
               </span>
@@ -48,6 +50,7 @@
                 v-model="price"
                 placeholder="Price"
               />
+              <br />
               <span class="error-feedback" v-if="v$?.price?.$error">
                 {{ v$?.price?.$errors[0]?.$message }}
               </span>
@@ -61,6 +64,7 @@
                 placeholder="Quantity"
                 step="1"
               />
+              <br />
               <span class="error-feedback" v-if="v$?.Quantity?.$error">
                 {{ v$?.Quantity?.$errors[0]?.$message }}
               </span>
@@ -238,38 +242,61 @@ export default {
     async addItem() {
       this.v$.$validate();
       if (!this.v$.$error) {
-        let result = await axios.post(`http://localhost:3000/items`, {
-          itemname: this.itemname,
-          price: parseFloat(this.price).toFixed(2), //ntaj3o float
-          description: this.description,
-          Quantity: this.Quantity,
-          phone: this.phone,
-          userId: parseInt(this.userId, 10),
-          RestId: parseInt(this.RestId, 10),
-          CatId: this.pickedCategory,
+        try {
+          // Check if the item already exists
+          const existingItems = await axios.get(`http://localhost:3000/items`);
+          const existingItem = existingItems.data.find(
+            (item) =>
+              item.itemname.toLowerCase() === this.itemname.toLowerCase()
+          );
 
-          // userId: this.userId, //this bash kola user kaydkhl l rest dyalo mashi dyal lakhr
-        });
-        console.log("form validation daz");
-        if (result.status == 201) {
-          (this.errorMessage = ""),
-            (this.successMessage = "item daz w tajouta"),
-            console.log("daz add new item");
+          if (!existingItem) {
+            // Generate a unique ID for the new item
+            const newId =
+              existingItems.data.length > 0
+                ? parseInt(
+                    existingItems.data[existingItems.data.length - 1].id
+                  ) + 1
+                : 1;
 
-          setTimeout(() => {
-            this.$router.push({
-              name: "Menu",
-              params: { RestId: this.RestId },
+            // Add the new item with the generated ID
+            let result = await axios.post(`http://localhost:3000/items`, {
+              id: newId.toString(),
+              itemname: this.itemname,
+              price: parseFloat(this.price).toFixed(2), // Convert price to float
+              description: this.description,
+              Quantity: this.Quantity,
+              phone: this.phone,
+              userId: parseInt(this.userId, 10),
+              RestId: parseInt(this.RestId),
+              CatId: parseInt(this.pickedCategory),
             });
-          }, 2000);
-        } else {
-          console.log("madaztsh add new item ");
-          this.errorMessage = "item not added";
+
+            if (result.status == 201) {
+              this.errorMessage = "";
+              this.successMessage = "Item added successfully.";
+
+              setTimeout(() => {
+                this.$router.push({
+                  name: "Menu",
+                  params: { RestId: this.RestId },
+                });
+              }, 2000);
+            } else {
+              this.errorMessage = "Failed to add item.";
+              this.successMessage = "";
+            }
+          } else {
+            this.errorMessage = "Item already exists.";
+            this.successMessage = "";
+          }
+        } catch (error) {
+          console.error("Error adding item:", error);
+          this.errorMessage = "Failed to add item.";
           this.successMessage = "";
         }
       } else {
-        console.log("ma²daztsh from validation ");
-        this.errorMessage = "try again, refresh  3mr ga3 fields";
+        this.errorMessage = "Try again, refresh all fields.";
         this.successMessage = "";
       }
     },
